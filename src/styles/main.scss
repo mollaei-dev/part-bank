@@ -1,0 +1,40 @@
+@use './mixins' as *;
+@font-face {
+  font-family: 'peyda';
+  src: url('@/assets/fonts/peyda-regular.ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'peyda';
+  src: url('@/assets/fonts/peyda-medium.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'peyda';
+  src: url('@/assets/fonts/peyda-semiBold.ttf');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'peyda';
+  src: url('@/assets/fonts/peyda-bold.ttf');
+  font-weight: 700;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: peyda, sans-serif;
+  background-color: #f7f8fa;
+}
+label,
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+}
