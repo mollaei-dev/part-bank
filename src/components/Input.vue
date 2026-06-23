@@ -17,7 +17,9 @@ const props = defineProps({
       :name="name"
       :placeholder="placeHolder"
     ></Field>
-    <ErrorMessage class="input__error" :name="name"></ErrorMessage>
+    <div class="input__error-wrapper">
+      <ErrorMessage class="input__error" :name="name"></ErrorMessage>
+    </div>
   </div>
 </template>
 
@@ -30,6 +32,7 @@ const props = defineProps({
     padding-right: 8px;
     padding-left: 8px;
     height: 22px;
+    width: 100%;
     &--login {
       color: #3c4351;
       font-size: 16px;
@@ -37,6 +40,7 @@ const props = defineProps({
     }
   }
   &__field {
+    // width: 100%;
     border-radius: 6px;
     padding-right: 8px;
     padding-left: 30px;
@@ -46,7 +50,7 @@ const props = defineProps({
     font: inherit;
     font-weight: 600;
     font-size: 14px;
-    //  width: 100%;
+    width: 100%;
     border: none;
     &--login {
       height: 48px;
@@ -59,9 +63,13 @@ const props = defineProps({
       color: #c3c5c9;
     }
   }
+  &__error-wrapper {
+    height: 18px;
+  }
   &__error {
+    width: 100%;
     color: #eb482b;
-    font-weight: 400;
+    font-weight: 4;
     font-size: 12px;
     padding: 0 8px;
   }
