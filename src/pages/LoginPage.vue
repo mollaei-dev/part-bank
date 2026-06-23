@@ -1,6 +1,11 @@
 <script setup>
 import { Form } from 'vee-validate'
 import Input from '@/components/Input.vue'
+import { ref } from 'vue'
+import showIcon from '@/assets/images/icons/show-password.png'
+import hideIcon from '@/assets/images/icons/hide-password.png'
+
+const showPassword = ref(true)
 </script>
 
 <template>
@@ -10,8 +15,21 @@ import Input from '@/components/Input.vue'
         <img class="login__logo" src="@/assets/images/logo.png" />
         <Form class="login__form">
           <div class="login__input-wrapper">
-            <Input variant="login" name="phoneNumber" label="شماره همراه" place-holder="09129876543" />
-            <Input variant="login" name="phoneNumber" label="رمزعبور" place-holder="Ali@1234" />
+            <Input
+              variant="login"
+              name="phoneNumber"
+              label="شماره همراه"
+              place-holder="09129876543"
+            />
+            <Input variant="login" :type="showPassword ? 'password' : 'text'" name="password" label="رمزعبور" place-holder="Ali@1234">
+              <template #icon
+                ><img
+                  @click="showPassword = !showPassword"
+                  :src="showPassword ? showIcon : hideIcon"
+                  class="login__icon-password"
+                />
+              </template>
+            </Input>
           </div>
           <button class="btn">ورود</button>
         </Form>
@@ -74,6 +92,13 @@ import Input from '@/components/Input.vue'
     @include flex(column, flex-start, stretch);
     width: 100%;
     gap: 8px;
+  }
+  &__icon-password {
+    position: absolute;
+    left: 8px;
+    width: 24px;
+    height: auto;
+    cursor: pointer;
   }
   &__footer {
     margin-bottom: 0;

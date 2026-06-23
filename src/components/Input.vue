@@ -6,17 +6,25 @@ const props = defineProps({
   label: String,
   placeHolder: { type: String, default: '' },
   variant: String,
+  type: { type: String, default: 'text' },
 })
 </script>
 
 <template>
   <div class="input">
     <label :class="['input__label', `input__label--${variant}`]">{{ props.label }}</label>
-    <Field
-      :class="['input__field', `input__field--${variant}`]"
-      :name="name"
-      :placeholder="placeHolder"
-    ></Field>
+    <div class="input__field-wrapper">
+      <Field
+        as="input"
+        :class="['input__field', `input__field--${variant}`]"
+        :name="name"
+        :placeholder="placeHolder"
+        :type="type"
+      >
+      </Field>
+      <slot name="icon"></slot>
+    </div>
+
     <div class="input__error-wrapper">
       <ErrorMessage class="input__error" :name="name"></ErrorMessage>
     </div>
@@ -45,8 +53,6 @@ const props = defineProps({
     padding-right: 8px;
     padding-left: 30px;
     color: #3c4351;
-    color: #eb482b;
-
     font: inherit;
     font-weight: 600;
     font-size: 14px;
@@ -61,6 +67,13 @@ const props = defineProps({
       font-weight: 400;
       font-size: 14px;
       color: #c3c5c9;
+    }
+    &-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
     }
   }
   &__error-wrapper {
