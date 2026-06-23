@@ -63,6 +63,9 @@ const props = defineProps({
       background-color: #f9fafb;
       font-size: 14px;
     }
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #f9fafb inset;
+    }
     &::placeholder {
       font-weight: 400;
       font-size: 14px;
