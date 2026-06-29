@@ -4,6 +4,7 @@ import Input from '@/components/Input.vue'
 import { ref } from 'vue'
 import showIcon from '@/assets/images/icons/show-password.png'
 import hideIcon from '@/assets/images/icons/hide-password.png'
+import Button from '@/components/Button.vue'
 
 const showPassword = ref(true)
 </script>
@@ -31,7 +32,7 @@ const showPassword = ref(true)
               </template>
             </Input>
           </div>
-          <button class="btn">ورود</button>
+          <Button type="primary" />
         </Form>
         <p class="login__footer">پشتیبانی: ۱۲۳۴۵۶۷۸-۰۲۱</p>
       </div>
@@ -116,12 +117,6 @@ const showPassword = ref(true)
     width: 100%;
     height: 100%;
   }
-}
-.btn {
-  width: 100%;
-  height: 48px;
-  background-color: #4152a0;
-  color: #fff;
 }
 
 /* Responsive */
