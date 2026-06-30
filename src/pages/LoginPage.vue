@@ -22,7 +22,13 @@ const showPassword = ref(true)
               label="شماره همراه"
               place-holder="09129876543"
             />
-            <Input variant="login" :type="showPassword ? 'password' : 'text'" name="password" label="رمزعبور" place-holder="Ali@1234">
+            <Input
+              variant="login"
+              :type="showPassword ? 'password' : 'text'"
+              name="password"
+              label="رمزعبور"
+              place-holder="Ali@1234"
+            >
               <template #icon
                 ><img
                   @click="showPassword = !showPassword"
@@ -51,33 +57,28 @@ const showPassword = ref(true)
   width: 100%;
   min-height: 100vh;
   &__container {
-    // @include flex(row, center, stretch);
     @include flex(row, stretch, stretch);
     background-color: #fff;
     box-shadow: 0px 0px 4px 0px #0043650d;
     border-radius: 20px;
-    max-width: 1200px;
+    max-width: 1200px; //new
     width: 65%;
-    // max-height: 840px;
+    max-height: 840px;
     height: auto;
-    // height: 700px; // بعد از تکمیل اینپوت و باتن حذف اینو تست کنم
   }
   &__right {
-    border: 2px solid red;
-    max-width: 600px;
     flex: 1 1 50%;
     @include flex(column, space-between, center);
     height: 100%;
-    // gap: 40px;
+    gap: 40px;
     padding: 32px 0;
   }
   &__logo {
     width: 46%;
-    border: 1p solid blue;
-    max-width: 279px;
+    max-width: 279px; //new
     height: auto;
     margin-top: 50px;
-    margin-bottom: 103px; //با حذف فلکس یک در فرم اینو اضافه کردم
+    margin-bottom: 128px; //new
   }
   &__form {
     @include flex(column, center, stretch);
@@ -85,12 +86,12 @@ const showPassword = ref(true)
     width: 59%;
     max-width: 354px;
     height: auto;
-    margin-bottom: 100px;
-    // margin-bottom: auto;
-    // flex: 1; //اینو باید از پروژه اصلی هم حذف کنم چون اگه به فرم بوردر رنگی بدم میفهمم این اضافیه
+    margin-bottom: auto;
+    margin-bottom: 110px;
+    flex: 1;
   }
   &__input-wrapper {
-    @include flex(column, flex-start, stretch);
+    @include flex(column, center, stretch);
     width: 100%;
     gap: 8px;
   }
@@ -106,10 +107,10 @@ const showPassword = ref(true)
     margin-top: auto;
     font-size: 14px;
     font-weight: 400;
+    color: #3c4351;
   }
   &__left {
     flex: 1 1 50%;
-    max-width: 600px;
     height: 100%;
     padding: 20px;
   }
