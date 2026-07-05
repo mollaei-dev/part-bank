@@ -1,12 +1,28 @@
 <script setup>
-import { Form } from 'vee-validate'
+import { defineRule, Form } from 'vee-validate'
 import Input from '@/components/Input.vue'
 import { ref } from 'vue'
 import showIcon from '@/assets/images/icons/show-password.png'
 import hideIcon from '@/assets/images/icons/hide-password.png'
 import Button from '@/components/Button.vue'
+import { required } from '@vee-validate/rules'
 
 const showPassword = ref(true)
+
+defineRule('required', (value, [label]) => {
+  if (!required(value)) return ` ${label} را وارد کنید `
+  return true
+})
+
+const mobilePattern = /^09\d{9}$/
+defineRule('phoneNumber', (value) => {
+  if (!mobilePattern.test(value)) return 'شماره همراه معتبر نیست'
+  return true
+})
+
+defineRule('password', (value) => {
+  if (value.length < 6) return ' رمز عبور حداقل باید 6 کاراکتر باشد'
+})
 </script>
 
 <template>
@@ -21,6 +37,7 @@ const showPassword = ref(true)
               name="phoneNumber"
               label="شماره همراه"
               place-holder="09129876543"
+              rules="required:شماره همراه|phoneNumber"
             />
             <Input
               variant="login"
@@ -28,6 +45,7 @@ const showPassword = ref(true)
               name="password"
               label="رمزعبور"
               place-holder="Ali@1234"
+              rules="required:رمزعبور|password"
             >
               <template #icon
                 ><img

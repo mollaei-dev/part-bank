@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { required } from '@vee-validate/rules'
-import { ErrorMessage, Field } from 'vee-validate'
+import {  ErrorMessage, Field } from 'vee-validate'
 const props = defineProps({
   name: { type: String, required: true },
   label: String,
   placeHolder: { type: String, default: '' },
   variant: String,
   type: { type: String, default: 'text' },
+  rules: { type: [String, Object], default: null },
 })
 </script>
 
@@ -20,6 +20,7 @@ const props = defineProps({
         :name="name"
         :placeholder="placeHolder"
         :type="type"
+        :rules="rules"
       >
       </Field>
       <slot name="icon"></slot>
