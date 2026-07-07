@@ -6,10 +6,36 @@ import showIcon from '@/assets/images/icons/show-password.png'
 import hideIcon from '@/assets/images/icons/hide-password.png'
 import Button from '@/components/Button.vue'
 import { registerValidationRules } from '@/validation/validationRuls'
+import api from '@/axios'
+import { useRouter } from 'vue-router'
 
 const showPassword = ref(true)
 registerValidationRules()
+const loading = ref(false)
+const router = useRouter()
 
+async function loginHandle(formData) {
+  loading.value = true
+  try {
+    const response = await api.post('/auth/login', {
+      phoneNumber: formData.phoneNumber,
+      password: formData.password,
+    })
+    const { token, user } = response.data
+    localStorage.setItem('token', token)
+    router.replace({ name: 'dashboard' })
+  } catch (error) {
+    if (!error.response) {
+      alert('server not found !!!!!!!')
+    } else if (error.response?.status === 401) {
+      alert('شماره یا رمز عبور اشتباه است')
+    } else {
+      alert('خطای سرور، لطفاً دوباره تلاش کنید')
+    }
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -17,7 +43,7 @@ registerValidationRules()
     <div class="login__container">
       <div class="login__right">
         <img class="login__logo" src="@/assets/images/logo.png" />
-        <Form class="login__form">
+        <Form @submit="loginHandle" class="login__form">
           <div class="login__input-wrapper">
             <Input
               variant="login"
