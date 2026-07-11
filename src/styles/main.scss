@@ -38,3 +38,27 @@ select {
   border: none;
   outline: none;
 }
+.Vue-Toastification__toast.app-toast {
+  max-width: 314px;
+  max-height: 60px;
+  border-radius: 16px;
+  padding: 16px;
+  background-color: #eb482b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+.Vue-Toastification__toast-body.app-toast-body {
+  color: #ffffff;
+  font-family: Peyda;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+}
+.Vue-Toastification__icon {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  color: white;
+}
