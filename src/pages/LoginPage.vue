@@ -8,11 +8,13 @@ import Button from '@/components/Button.vue'
 import { registerValidationRules } from '@/validation/validationRuls'
 import api from '@/axios'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 const showPassword = ref(true)
 registerValidationRules()
 const loading = ref(false)
 const router = useRouter()
+const toast = useToast()
 
 async function loginHandle(formData) {
   loading.value = true
@@ -26,14 +28,23 @@ async function loginHandle(formData) {
     router.replace({ name: 'dashboard' })
   } catch (error) {
     if (!error.response) {
-      alert('server not found !!!!!!!')
+      toast.error('خطا در برقراری ارتباط با سرور')
+      localStorage.setItem('token', 'demo-token')
+      setTimeout(() => {
+        toast.info('ورود در حالت دمو انجام شد')
+      }, 2000)
+      setTimeout(() => {
+        router.replace({ name: 'dashboard' })
+      }, 4000)
     } else if (error.response?.status === 401) {
-      alert('شماره یا رمز عبور اشتباه است')
+      toast.error('شماره یا رمز عبور اشتباه است')
     } else {
-      alert('خطای سرور، لطفاً دوباره تلاش کنید')
+      toast.error('خطای سرور، لطفاً دوباره تلاش کنید')
     }
   } finally {
-    loading.value = false
+    setTimeout(() => {
+      loading.value = false
+    }, 4000)
   }
 }
 </script>
