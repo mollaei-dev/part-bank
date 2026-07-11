@@ -15,5 +15,6 @@ export function registerValidationRules() {
 
   defineRule('password', (value) => {
     if (value.length < 6) return ' رمز عبور حداقل باید 6 کاراکتر باشد'
+    return true
   })
 }

@@ -3,10 +3,13 @@ const props = defineProps({
   type: { type: String, default: 'button' },
   variant: { type: String, default: 'primary' },
   heightBtn: { type: String, default: '58px' },
+  disabled: { type: String, default: false },
 })
 </script>
 <template>
-  <button :type="type" :class="['btn', `btn--${variant}`]">ورود</button>
+  <button :type="type" :disabled="disabled" :class="['btn', `btn--${variant}`]">
+    <slot name="btnLabel"></slot>
+  </button>
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
@@ -25,9 +28,13 @@ const props = defineProps({
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.11);
   }
-   &:active {
+  &:active {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.11);
+  }
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
   }
   &--primary {
     background-color: #4152a0;

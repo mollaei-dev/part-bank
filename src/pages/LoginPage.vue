@@ -80,7 +80,9 @@ async function loginHandle(formData) {
               </template>
             </Input>
           </div>
-          <Button type="primary" />
+          <Button type="Submit" :disabled="loading">
+            <template #btnLabel>{{ loading ? 'در حال ورود ...' : 'ورود' }}</template>
+          </Button>
         </Form>
         <p class="login__footer">پشتیبانی: ۱۲۳۴۵۶۷۸-۰۲۱</p>
       </div>
