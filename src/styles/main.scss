@@ -1,4 +1,5 @@
 @use './mixins' as *;
+@use './helpers' as *;
 @font-face {
   font-family: 'peyda';
   src: url('@/assets/fonts/peyda-regular.ttf');
