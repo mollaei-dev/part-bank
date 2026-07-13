@@ -1,5 +1,8 @@
 <style lang="scss" scoped></style>
 <template>
-<RouterView></RouterView>
+  <Header v-if="$route.fullPath !== '/'"></Header>
+  <RouterView></RouterView>
 </template>
-<script setup></script>
+<script setup>
+import Header from './components/Header.vue'
+</script>
