@@ -1,6 +1,7 @@
-<script setup lang="ts">
-import {  ErrorMessage, Field } from 'vee-validate'
+<script setup>
+import { ErrorMessage, Field } from 'vee-validate'
 const props = defineProps({
+  as: { type: String, default: 'input' },
   name: { type: String, required: true },
   label: String,
   placeHolder: { type: String, default: '' },
@@ -15,8 +16,12 @@ const props = defineProps({
     <label :class="['input__label', `input__label--${variant}`]">{{ props.label }}</label>
     <div class="input__field-wrapper">
       <Field
-        as="input"
-        :class="['input__field', `input__field--${variant}`]"
+        :as="as"
+        :class="[
+          'input__field',
+          `input__field--${variant}`,
+          as === 'textarea' ? `input__field--textarea-${variant}` : null,
+        ]"
         :name="name"
         :placeholder="placeHolder"
         :type="type"
@@ -34,6 +39,7 @@ const props = defineProps({
 
 <style lang="scss">
 .input {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -47,9 +53,13 @@ const props = defineProps({
       font-size: 16px;
       font-weight: 400;
     }
+    &--personal {
+      color: #8999b9;
+      font-size: 14px;
+      font-weight: 600;
+    }
   }
   &__field {
-    // width: 100%;
     border-radius: 6px;
     padding-right: 8px;
     padding-left: 30px;
@@ -63,6 +73,17 @@ const props = defineProps({
       height: 48px;
       background-color: #f9fafb;
       font-size: 14px;
+    }
+    &--personal {
+      height: 40px;
+      border: 1px solid #ececee;
+      background-color: #f9fafb;
+      font-size: 14px;
+    }
+    &--textarea-personal {
+      height: 120px;
+      padding: 16px 8px;
+      resize: none;
     }
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 1000px #f9fafb inset;
