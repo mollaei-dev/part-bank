@@ -24,6 +24,9 @@ async function loginHandle(formData) {
       password: formData.password,
     })
     const { token, user } = response.data
+    if (user) {
+      userStore.setCurrentUser(user)
+    }
     localStorage.setItem('token', token)
     router.replace({ name: 'dashboard' })
   } catch (error) {
