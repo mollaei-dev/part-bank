@@ -1,5 +1,31 @@
-<style lang="scss" scoped></style>
+<script setup>
+import Button from '@/components/Button.vue'
+import ImageUploader from '@/components/ImageUploader.vue'
+</script>
 <template>
-
+  <div class="page">
+    <div class="page__title">تصویر کارت ملی</div>
+    <div class="divider"></div>
+    <div class="uploade-cards">
+      <ImageUploader />
+      <ImageUploader />
+    </div>
+    <div class="page__form-buttons">
+      <Button siz="" @press="goBack" variant="secondary">
+        <template #btnLabel>قبلی</template>
+      </Button>
+      <Button type="submit">
+        <template #btnLabel>ثبت و ادامه</template>
+      </Button>
+    </div>
+  </div>
 </template>
-<script setup></script>
+
+<style lang="scss" scoped>
+.uploade-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+</style>
