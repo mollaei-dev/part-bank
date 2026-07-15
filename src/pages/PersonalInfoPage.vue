@@ -45,7 +45,7 @@ function goBack() {
           label="کدپستی"
           placeHolder="کدپستی 10 رقمی"
           variant="personal"
-          rules="required:کدپستی"
+          rules="required:کدپستی|postalCode"
         />
       </div>
       <Input

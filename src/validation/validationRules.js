@@ -17,4 +17,12 @@ export function registerValidationRules() {
     if (value.length < 6) return ' رمز عبور حداقل باید 6 کاراکتر باشد'
     return true
   })
+
+  const postalCodePattern = /^\d{10}$/
+  defineRule('postalCode', (value) => {
+    if (!postalCodePattern.test(value)) {
+      return 'کد پستی باید ۱۰ رقم باشد'
+    }
+    return true
+  })
 }
