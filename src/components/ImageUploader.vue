@@ -1,15 +1,42 @@
-<script setup></script>
+<script setup>
+import { useUserStore } from '@/stores/userStore'
+import { computed, ref } from 'vue'
+
+const props = defineProps(['side'])
+const fileInput = ref(null)
+
+const userStore = useUserStore()
+
+const priviewUrl = computed(() =>
+  props.side === 'front' ? userStore.userInfo.frontCardImage : userStore.userInfo.backCardImage,
+)
+
+function clickFileInput() {
+  fileInput.value.click()
+}
+
+function handleFile(event) {
+  userStore.saveCardImage(event.target.files[0], props.side)
+}
+</script>
 <template>
   <div class="upload">
-    <div class="upload__dropzone">
-      <img class="upload__icon" src="@/assets/images/icons/upload.png" />
-      <p class="upload__text">
-        تصویر را بکشید و اینجا رها کنید یا <br />
-        <span>کلیک کنید.</span>
-      </p>
+    <div @click="clickFileInput()" class="upload__dropzone">
+      <input type="file" ref="fileInput" @change="handleFile" hidden />
+
+      <img v-if="priviewUrl" class="upload__priview" :src="priviewUrl" />
+      <div v-else class="upload__placeholder">
+        <img class="upload__icon" src="@/assets/images/icons/upload.png" alt="upload" />
+        <p class="upload__text">
+          ? تصویر را بکشید و اینجا رها کنید <br />
+          یا <span>کلیک کنید</span>.
+        </p>
+      </div>
     </div>
     <div class="upload__footer">
-      <p class="upload__label">تصویر روی کارت ملی</p>
+      <p class="upload__label">
+        {{ side === 'front' ? 'تصویر روی کارت ملی' : 'تصویر پشت کارت ملی' }}
+      </p>
       <img />
     </div>
   </div>
@@ -27,12 +54,16 @@
     border-radius: 12px 12px 0 0;
     cursor: pointer;
   }
+  &__priview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
   &__icon {
     width: 68px;
     height: 50px;
   }
   &__text {
-    white-space: pre-wrap;
     font-weight: 600;
     font-size: 14px;
     text-align: center;

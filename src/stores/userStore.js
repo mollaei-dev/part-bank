@@ -20,5 +20,15 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
   }
 
-  return { currentUser, userInfo, setCurrentUser, saveInfo }
+  function saveCardImage(file, side) {
+    const reader = new FileReader()
+    reader.onload = () => {
+      if (side === 'front') userInfo.value.frontCardImage = reader.result
+      else userInfo.value.backCardImage = reader.result
+      localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
+    }
+    reader.readAsDataURL(file)
+  }
+
+  return { currentUser, userInfo, setCurrentUser, saveInfo, saveCardImage }
 })

@@ -7,8 +7,8 @@ import ImageUploader from '@/components/ImageUploader.vue'
     <div class="page__title">تصویر کارت ملی</div>
     <div class="divider"></div>
     <div class="uploade-cards">
-      <ImageUploader />
-      <ImageUploader />
+      <ImageUploader side="front" />
+      <ImageUploader side="back" />
     </div>
     <div class="page__form-buttons">
       <Button siz="" @press="goBack" variant="secondary">
