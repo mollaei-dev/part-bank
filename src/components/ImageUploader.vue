@@ -73,7 +73,7 @@ function showError(message) {
       </p>
       <img />
     </div>
-    <p v-if="errorMessage">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="upload__error">{{ errorMessage }}</p>
   </div>
 </template>
 <style lang="scss">
@@ -141,6 +141,13 @@ function showError(message) {
     font-weight: 400;
     font-size: 14px;
     color: #3c4351;
+  }
+  &__error {
+    color: #eb482b;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 0 8px;
+    margin-top: 10px;
   }
 }
 </style>
