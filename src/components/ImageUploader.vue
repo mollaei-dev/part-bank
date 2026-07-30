@@ -51,7 +51,9 @@ function showError(message) {
       @dragleave="isDragging = false"
       class="upload__dropzone"
     >
-    
+      <svg class="upload__dropzone-border">
+        <rect class="upload__dropzone-border-rect"></rect>
+      </svg>
       <input type="file" ref="fileInput" @change="processFile($event.target.files[0])" hidden />
 
       <img v-if="priviewUrl" class="upload__priview" :src="priviewUrl" />
@@ -85,6 +87,24 @@ function showError(message) {
     height: 180px;
     border-radius: 12px 12px 0 0;
     cursor: pointer;
+    &-border {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+      &-rect {
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke: #e2edff;
+        stroke-width: 1px;
+        stroke-dasharray: 7 7;
+        clip-path: inset(0 round 12px 12px 0 0);
+      }
+    }
   }
   &__priview {
     width: 100%;
