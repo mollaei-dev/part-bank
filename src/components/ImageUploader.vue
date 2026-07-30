@@ -6,6 +6,7 @@ const props = defineProps(['side'])
 const fileInput = ref(null)
 
 const userStore = useUserStore()
+const errorMessage = ref('')
 
 const priviewUrl = computed(() =>
   props.side === 'front' ? userStore.userInfo.frontCardImage : userStore.userInfo.backCardImage,
@@ -15,14 +16,43 @@ function clickFileInput() {
   fileInput.value.click()
 }
 
-function handleFile(event) {
-  userStore.saveCardImage(event.target.files[0], props.side)
+function processFile(file) {
+  errorMessage.value = ''
+  if (!file) {
+    showError(`تصویر ${props.side === 'front' ? 'روی' : 'پشت'} کارت ملی الزامی است`)
+    return
+  }
+  if (!file.type.startsWith('image/')) {
+    showError('فقط فایل تصویری مجاز است')
+    return
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    showError('حجم عکس نباید بیشتر از ۵ مگابایت باشد')
+    return
+  }
+  userStore.saveCardImage(file, props.side)
+}
+
+let errorTimer = null
+function showError(message) {
+  if (errorTimer) clearTimeout(errorTimer)
+  errorMessage.value = message
+  errorTimer = setTimeout(() => {
+    errorMessage.value = ''
+  }, 2000)
 }
 </script>
 <template>
   <div class="upload">
-    <div @click="clickFileInput()" class="upload__dropzone">
-      <input type="file" ref="fileInput" @change="handleFile" hidden />
+    <div
+      @click="clickFileInput()"
+      @dragover.prevent="isDragging = true"
+      @drop.prevent="processFile($event.dataTransfer.files[0])"
+      @dragleave="isDragging = false"
+      class="upload__dropzone"
+    >
+    
+      <input type="file" ref="fileInput" @change="processFile($event.target.files[0])" hidden />
 
       <img v-if="priviewUrl" class="upload__priview" :src="priviewUrl" />
       <div v-else class="upload__placeholder">
@@ -39,6 +69,7 @@ function handleFile(event) {
       </p>
       <img />
     </div>
+    <p v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 <style lang="scss">
@@ -48,6 +79,7 @@ function handleFile(event) {
   background-color: #f9fafb;
   border-radius: 12px;
   &__dropzone {
+    position: relative;
     text-align: center;
     width: 100%;
     height: 180px;
