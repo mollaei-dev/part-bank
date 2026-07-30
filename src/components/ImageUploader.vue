@@ -7,7 +7,7 @@ const fileInput = ref(null)
 
 const userStore = useUserStore()
 const errorMessage = ref('')
-
+const isDragging = ref(false)
 const priviewUrl = computed(() =>
   props.side === 'front' ? userStore.userInfo.frontCardImage : userStore.userInfo.backCardImage,
 )
@@ -31,6 +31,7 @@ function processFile(file) {
     return
   }
   userStore.saveCardImage(file, props.side)
+  isDragging.value = false
 }
 
 let errorTimer = null
@@ -50,6 +51,7 @@ function showError(message) {
       @drop.prevent="processFile($event.dataTransfer.files[0])"
       @dragleave="isDragging = false"
       class="upload__dropzone"
+      :class="{ 'upload__dropzone--dragging': isDragging }"
     >
       <svg class="upload__dropzone-border">
         <rect class="upload__dropzone-border-rect"></rect>
@@ -103,6 +105,11 @@ function showError(message) {
         stroke-width: 1px;
         stroke-dasharray: 7 7;
         clip-path: inset(0 round 12px 12px 0 0);
+      }
+    }
+    &--dragging {
+      .upload__dropzone-border-rect {
+        stroke: #1976d2;
       }
     }
   }
