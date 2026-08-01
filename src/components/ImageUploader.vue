@@ -1,6 +1,9 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
 import { computed, ref } from 'vue'
+import ActionMenu from './ActionMenu.vue'
+import editIcon from '@/assets/images/icons/edit.png'
+import deleteIcon from '@/assets/images/icons/trash.png'
 
 const props = defineProps(['side'])
 const fileInput = ref(null)
@@ -8,6 +11,11 @@ const fileInput = ref(null)
 const userStore = useUserStore()
 const errorMessage = ref('')
 const isDragging = ref(false)
+const isMenuOpen = ref(false)
+const menuItems = [
+  { icon: editIcon, label: 'ویرایش', action: 'edit-image' },
+  { icon: deleteIcon, label: 'حذف', action: 'delete-image', danger: true },
+]
 const priviewUrl = computed(() =>
   props.side === 'front' ? userStore.userInfo.frontCardImage : userStore.userInfo.backCardImage,
 )
@@ -42,6 +50,17 @@ function showError(message) {
     errorMessage.value = ''
   }, 2000)
 }
+
+function handleMenuAction(action) {
+  if (action === 'edit-image') {
+    fileInput.value.click()
+    isMenuOpen.value = false
+  } else if (action === 'delete-image') {
+    userStore.deleteCardImage(props.side)
+    priviewUrl.value = null
+    isMenuOpen.value = false
+  }
+}
 </script>
 <template>
   <div class="upload">
@@ -71,13 +90,27 @@ function showError(message) {
       <p class="upload__label">
         {{ side === 'front' ? 'تصویر روی کارت ملی' : 'تصویر پشت کارت ملی' }}
       </p>
-      <img />
+      <img
+        class="upload__menu-icon"
+        @click="isMenuOpen = !isMenuOpen"
+        :hidden="!priviewUrl"
+        src="@/assets/images/icons/more.png"
+        alt="menu"
+      />
+      <ActionMenu
+        :menuItems="menuItems"
+        @select="handleMenuAction"
+        class="upload__menu"
+        :class="{ 'upload__menu--isopen': isMenuOpen }"
+      />
     </div>
     <p v-if="errorMessage" class="upload__error">{{ errorMessage }}</p>
   </div>
 </template>
 <style lang="scss">
+@use '@/styles/mixins' as *;
 .upload {
+  position: relative;
   width: 320px;
   height: 232px;
   background-color: #f9fafb;
@@ -118,6 +151,10 @@ function showError(message) {
     height: 100%;
     object-fit: contain;
   }
+  &__placeholder {
+    @include flex(column, center, center);
+    gap: 8px;
+  }
   &__icon {
     width: 68px;
     height: 50px;
@@ -141,6 +178,28 @@ function showError(message) {
     font-weight: 400;
     font-size: 14px;
     color: #3c4351;
+  }
+  &__menu {
+    &-icon {
+      cursor: pointer;
+    }
+  }
+  &__menu {
+    position: absolute;
+    bottom: 12px;
+    left: 16px;
+    width: 93px;
+    height: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease-in;
+    &--isopen {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    &-icon {
+      cursor: pointer;
+    }
   }
   &__error {
     color: #eb482b;
