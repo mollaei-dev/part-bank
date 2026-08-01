@@ -29,6 +29,10 @@ export const useUserStore = defineStore('user', () => {
     }
     reader.readAsDataURL(file)
   }
-
-  return { currentUser, userInfo, setCurrentUser, saveInfo, saveCardImage }
+  function deleteCardImage(side) {
+    if (side === 'front') userInfo.value.frontCardImage = null
+    else userInfo.value.backCardImage = null
+    localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
+  }
+  return { currentUser, userInfo, setCurrentUser, saveInfo, saveCardImage, deleteCardImage }
 })
