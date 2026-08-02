@@ -5,9 +5,15 @@ const props = defineProps({
   heightBtn: { type: String, default: '48px' },
   disabled: { type: String, default: false },
 })
+const emit = defineEmits(['press'])
 </script>
 <template>
-  <button :type="type" :disabled="disabled" :class="['btn', `btn--${variant}`]">
+  <button
+    @click="emit('press')"
+    :type="type"
+    :disabled="disabled"
+    :class="['btn', `btn--${variant}`]"
+  >
     <slot name="btnLabel"></slot>
   </button>
 </template>
