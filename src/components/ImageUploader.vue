@@ -1,11 +1,11 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import ActionMenu from './ActionMenu.vue'
 import editIcon from '@/assets/images/icons/edit.png'
 import deleteIcon from '@/assets/images/icons/trash.png'
 
-const props = defineProps(['side'])
+const props = defineProps(['side', 'isRequired'])
 const fileInput = ref(null)
 
 const userStore = useUserStore()
@@ -19,6 +19,13 @@ const menuItems = [
 const priviewUrl = computed(() =>
   props.side === 'front' ? userStore.userInfo.frontCardImage : userStore.userInfo.backCardImage,
 )
+watch(
+  () => props.isRequired,
+  (newValue) => {
+    if (newValue && props.side === 'front') showError('تصویر روی کارت ملی الزامی است')
+    if (newValue && props.side === 'back') showError('تصویر پشت کارت ملی الزامی است')
+  },
+)
 
 function clickFileInput() {
   fileInput.value.click()
@@ -26,10 +33,7 @@ function clickFileInput() {
 
 function processFile(file) {
   errorMessage.value = ''
-  if (!file) {
-    showError(`تصویر ${props.side === 'front' ? 'روی' : 'پشت'} کارت ملی الزامی است`)
-    return
-  }
+
   if (!file.type.startsWith('image/')) {
     showError('فقط فایل تصویری مجاز است')
     return
