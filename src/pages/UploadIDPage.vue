@@ -23,7 +23,6 @@ function handleSubmit() {
 
   if (userStore.userInfo.frontCardImage && userStore.userInfo.backCardImage)
     router.push({ name: 'confirm-info' })
-  else isRequired.value = false
 }
 </script>
 <template>

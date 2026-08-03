@@ -24,7 +24,7 @@ function goBack() {
   <div class="page">
     <h1 class="page__title">اطلاعات فردی</h1>
     <div class="divider"></div>
-    <Form @submit="saveData" class="page__form">
+    <Form @submit="saveData" :initial-values="userStore.userInfo" class="page__form">
       <div class="page__form-row">
         <Input
           name="firstName"
