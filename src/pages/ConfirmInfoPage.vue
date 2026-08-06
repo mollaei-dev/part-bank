@@ -4,15 +4,39 @@ import Input from '@/components/Input.vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import { Form } from 'vee-validate'
+import api from '@/axios'
+import { ref } from 'vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const loading = ref(false)
 
-function handleSubmit() {
-  router.push({ name: 'dashboard' })
-}
 function goBack() {
   router.push({ name: 'upload-id' })
+}
+async function handleSubmit() {
+  loading.value = true
+  try {
+    const response = await api.post('', {
+      firstName: userStore.userInfo.firstName,
+      lastName: userStore.userInfo.lastName,
+      postalCode: userStore.userInfo.postalCode,
+      address: userStore.userInfo.address,
+      nationalCardImage: userStore.userInfo.frontCardImage,
+    })
+    if (response.status === 201) {
+      router.push({ name: 'dashboard' })
+    }
+  } catch (error) {
+    if (!error.response) {
+      await userStore.activeDemoMode()
+      router.replace({ name: 'dashboard' })
+    }
+  } finally {
+    setTimeout(() => {
+      loading.value = false
+    }, 6500)
+  }
 }
 </script>
 <template>
@@ -30,8 +54,8 @@ function goBack() {
         <Button @press="goBack" variant="secondary">
           <template #btnLabel>قبلی</template>
         </Button>
-        <Button type="submit">
-          <template #btnLabel>افتتاح حساب</template>
+        <Button type="submit" :disabled="loading">
+          <template #btnLabel>{{ loading ? 'درحال ایجاد حساب' : 'افتتاح حساب' }}</template>
         </Button>
       </div>
     </Form>
