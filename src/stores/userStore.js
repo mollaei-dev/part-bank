@@ -1,5 +1,8 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { useToast } from 'vue-toastification'
+const delay = (ms) => new Promise((res) => setTimeout(res, ms))
+const toast = useToast()
 
 export const useUserStore = defineStore('user', () => {
   const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')) || null)
@@ -34,5 +37,21 @@ export const useUserStore = defineStore('user', () => {
     else userInfo.value.backCardImage = null
     localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
   }
-  return { currentUser, userInfo, setCurrentUser, saveInfo, saveCardImage, deleteCardImage }
+
+  async function activeDemoMode() {
+    toast.error('خطا در برقراری ارتباط با سرور')
+    localStorage.setItem('token', 'demoToken')
+    await delay(3000)
+    toast.info('حالت دمو فعال شد')
+    await delay(2000)
+  }
+  return {
+    currentUser,
+    userInfo,
+    setCurrentUser,
+    saveInfo,
+    saveCardImage,
+    deleteCardImage,
+    activeDemoMode,
+  }
 })
