@@ -58,6 +58,11 @@ const props = defineProps({
       font-size: 14px;
       font-weight: 600;
     }
+    &--confirm {
+      color: #8999b9;
+      font-size: 16px;
+      font-weight: 400;
+    }
   }
   &__field {
     border-radius: 6px;
@@ -80,9 +85,20 @@ const props = defineProps({
       background-color: #f9fafb;
       font-size: 14px;
     }
+    &--confirm {
+      height: 22px;
+      border: none;
+      background-color: #fff;
+      font-size: 16px;
+    }
     &--textarea-personal {
       height: 120px;
       padding: 16px 8px;
+      resize: none;
+    }
+    &--textarea-confirm {
+      height: auto;
+      overflow-y: hidden;
       resize: none;
     }
     &:-webkit-autofill {
