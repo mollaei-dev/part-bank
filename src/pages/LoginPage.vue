@@ -9,12 +9,14 @@ import { registerValidationRules } from '@/validation/validationRules'
 import api from '@/axios'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
+import { useUserStore } from '@/stores/userStore'
 
 const showPassword = ref(true)
 registerValidationRules()
 const loading = ref(false)
 const router = useRouter()
 const toast = useToast()
+const userStore = useUserStore()
 
 async function loginHandle(formData) {
   loading.value = true
@@ -31,14 +33,8 @@ async function loginHandle(formData) {
     router.replace({ name: 'dashboard' })
   } catch (error) {
     if (!error.response) {
-      toast.error('خطا در برقراری ارتباط با سرور')
-      localStorage.setItem('token', 'demo-token')
-      setTimeout(() => {
-        toast.info('ورود در حالت دمو انجام شد')
-      }, 2000)
-      setTimeout(() => {
-        router.replace({ name: 'dashboard' })
-      }, 4000)
+      await userStore.activeDemoMode()
+      router.replace({ name: 'dashboard' })
     } else if (error.response?.status === 401) {
       toast.error('شماره یا رمز عبور اشتباه است')
     } else {
