@@ -7,6 +7,7 @@ const toast = useToast()
 export const useUserStore = defineStore('user', () => {
   const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')) || null)
   const userInfo = ref(JSON.parse(localStorage.getItem('userInfo')) || {})
+  const hasAccount = ref(JSON.parse(localStorage.getItem('hasAccount')) || false)
 
   function setCurrentUser(user) {
     currentUser.value = user
@@ -37,7 +38,10 @@ export const useUserStore = defineStore('user', () => {
     else userInfo.value.backCardImage = null
     localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
   }
-
+  function setHasAccount(status) {
+    hasAccount.value = status
+    localStorage.setItem('hasAccount', JSON.stringify(status))
+  }
   async function activeDemoMode() {
     toast.error('خطا در برقراری ارتباط با سرور')
     localStorage.setItem('token', 'demoToken')
@@ -53,5 +57,6 @@ export const useUserStore = defineStore('user', () => {
     saveCardImage,
     deleteCardImage,
     activeDemoMode,
+    setHasAccount
   }
 })
