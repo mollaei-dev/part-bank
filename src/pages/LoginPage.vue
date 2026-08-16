@@ -33,7 +33,7 @@ async function loginHandle(formData) {
     router.replace({ name: 'dashboard' })
   } catch (error) {
     if (!error.response) {
-      await userStore.activeDemoMode()
+      await userStore.activateDemoMode()
       router.replace({ name: 'dashboard' })
     } else if (error.response?.status === 401) {
       toast.error('شماره یا رمز عبور اشتباه است')

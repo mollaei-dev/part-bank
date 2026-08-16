@@ -29,7 +29,7 @@ async function handleSubmit() {
     }
   } catch (error) {
     if (!error.response) {
-      await userStore.activeDemoMode()
+      await userStore.activateDemoMode()
       userStore.setHasAccount(true)
       router.replace({ name: 'dashboard' })
     }

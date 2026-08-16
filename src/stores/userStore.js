@@ -43,7 +43,7 @@ export const useUserStore = defineStore('user', () => {
     hasAccount.value = status
     localStorage.setItem('hasAccount', JSON.stringify(status))
   }
-  async function activeDemoMode() {
+  async function activateDemoMode() {
     toast.error('خطا در برقراری ارتباط با سرور')
     localStorage.setItem('token', 'demoToken')
     setCurrentUser(demoUser)
@@ -58,7 +58,7 @@ export const useUserStore = defineStore('user', () => {
     saveInfo,
     saveCardImage,
     deleteCardImage,
-    activeDemoMode,
+    activateDemoMode,
     setHasAccount,
   }
 })
