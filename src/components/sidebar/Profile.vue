@@ -1,9 +1,21 @@
+<script setup>
+import { useUserStore } from '@/stores/userStore'
+function toPersianNumber(str) {
+  if (str === null || str === undefined) return ''
+  return str.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d])
+}
+const userStore = useUserStore()
+</script>
 <template>
   <div class="profile">
-    <h2 class="profile__name">محمد رحمانی نصب</h2>
+    <h2 class="profile__name">
+      {{ userStore.currentUser.firstName }} {{ userStore.currentUser.lastName }}
+    </h2>
     <p class="profile__id">
       <label class="profile__id-label">کدملی:</label>
-      <span class="profile__id-value">0920125444</span>
+      <span class="profile__id-value">{{
+        toPersianNumber(userStore.currentUser?.idNumber) || ''
+      }}</span>
     </p>
   </div>
 </template>
