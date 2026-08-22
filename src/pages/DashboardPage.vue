@@ -4,13 +4,15 @@ import Sidebar from '@/components/sidebar/Sidebar.vue'
 import vector from '@/assets/images/icons/vector.png'
 import arrowLeft from '@/assets/images/icons/arrowLeft.png'
 import infoCircle from '@/assets/images/icons/infoCircle.png'
+import BalanceCard from '@/components/dashboard/BalanceCard.vue'
+
 </script>
 <template>
   <div class="dashboard">
     <Sidebar />
     <div class="dashboard__content">
       <div class="dashboard__cards">
-        <BaseCard />
+        <BalanceCard />
         <BaseCard card-title="امتیاز حساب" btn-label="محاسبه امتیاز" :metaIcon="infoCircle">
           <template #content>
             <div class="card-content">
