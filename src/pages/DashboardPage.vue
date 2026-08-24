@@ -14,7 +14,8 @@ import { ref, computed } from 'vue'
 const userStore = useUserStore()
 const toast = useToast()
 const account = ref({})
-
+const cardNumber = computed(() => account.value?.accountNumber ?? '')
+const cardBalance = computed(() => account.value?.balance ?? 0)
 
 onMounted(async () => {
   const token = localStorage.getItem('token')
@@ -42,7 +43,7 @@ onMounted(async () => {
     <Sidebar />
     <div class="dashboard__content">
       <div class="dashboard__cards">
-        <BalanceCard />
+        <BalanceCard :card-balance="cardBalance" :card-number="cardNumber" />
         <BaseCard card-title="امتیاز حساب" btn-label="محاسبه امتیاز" :metaIcon="infoCircle">
           <template #content>
             <div class="card-content">

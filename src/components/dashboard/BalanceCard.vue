@@ -1,4 +1,15 @@
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+
+const props = defineProps(['cardBalance', 'cardNumber'])
+
+const cardParts = computed(() => {
+  return props.cardNumber.match(/.{4}/g) || []
+})
+const formatToPersian = (str) => {
+  return str.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d])
+}
+</script>
 <template>
   <div class="balance-card">
     <div class="balance-card__header">
@@ -6,10 +17,16 @@
 
       <div class="balance-card__amount">
         <h4 class="balance-card__label">موجودی کل</h4>
-        <div class="balance-card__amount--value">۴۲۴۹۷۸۴۰۰۰</div>
+        <div class="balance-card__amount--value">
+          {{ Number(cardBalance ?? 0).toLocaleString('fa-IR') }}
+        </div>
       </div>
     </div>
-    <div class="balance-card__number">۵۴۱۸ ۲۷۴۱ ۶۶۹۸ ۸۲۵۱</div>
+    <div class="balance-card__number">
+      <span v-for="(value, index) in cardParts" :key="index">
+        {{ formatToPersian(value) }}
+      </span>
+    </div>
   </div>
 </template>
 <style lang="scss">
