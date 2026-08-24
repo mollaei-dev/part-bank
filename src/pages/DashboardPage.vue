@@ -5,7 +5,37 @@ import vector from '@/assets/images/icons/vector.png'
 import arrowLeft from '@/assets/images/icons/arrowLeft.png'
 import infoCircle from '@/assets/images/icons/infoCircle.png'
 import BalanceCard from '@/components/dashboard/BalanceCard.vue'
+import { onMounted } from 'vue'
+import axios from 'axios'
+import { useUserStore } from '@/stores/userStore'
+import { useToast } from 'vue-toastification'
+import { ref, computed } from 'vue'
 
+const userStore = useUserStore()
+const toast = useToast()
+const account = ref({})
+
+
+onMounted(async () => {
+  const token = localStorage.getItem('token')
+  try {
+    const response = await axios.get('/mock/db.json', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    if (!userStore.currentUser) userStore.setCurrentUser(response.data.user)
+    if (userStore.hasAccount) {
+      account.value = response.data.accounts[0]
+    }
+  } catch (error) {
+    if (!error.response) {
+      toast.error('خطا در برقراری ارتباط با سرور')
+    } else {
+      toast.error('دریافت اطلاعات با خطا مواجه شد')
+    }
+  }
+})
 </script>
 <template>
   <div class="dashboard">
@@ -16,8 +46,16 @@ import BalanceCard from '@/components/dashboard/BalanceCard.vue'
         <BaseCard card-title="امتیاز حساب" btn-label="محاسبه امتیاز" :metaIcon="infoCircle">
           <template #content>
             <div class="card-content">
-              <p class="card-content__row">ریال<span class="card-content__amount">0</span></p>
-              <p class="card-content__row">ماهه<span class="card-content__duration">0</span></p>
+              <p class="card-content__row">
+                <span class="card-content__amount">{{
+                  Number(account?.score?.amount).toLocaleString('fa-IR') || 0
+                }}</span>ریال
+              </p>
+              <p class="card-content__row">
+                <span class="card-content__duration">{{
+                  Number(account?.score?.durationMonth).toLocaleString('fa-IR') || 0
+                }}</span>ماهه
+              </p>
             </div>
           </template>
         </BaseCard>
@@ -32,10 +70,17 @@ import BalanceCard from '@/components/dashboard/BalanceCard.vue'
             <div class="card-details">
               <p class="card-details__row">
                 مبلغ قسط:
-                <span class="card-details__amount">350,000,000</span>
+                <span class="card-details__amount">{{
+                  Number(account?.nextInstallment?.amount).toLocaleString('fa-IR') || 0
+                }}</span>
               </p>
               <p class="card-details__row">
-                تاریخ سررسید: <span class="card-details__duration">16/12/1403</span>
+                تاریخ سررسید:
+                <span class="card-details__duration">{{
+                  account?.nextInstallment?.dueDate
+                    ? new Date(account?.nextInstallment?.dueDate).toLocaleDateString('fa-IR')
+                    : '-'
+                }}</span>
               </p>
             </div>
           </template>
