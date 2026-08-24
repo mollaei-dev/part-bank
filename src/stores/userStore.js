@@ -60,5 +60,6 @@ export const useUserStore = defineStore('user', () => {
     deleteCardImage,
     activateDemoMode,
     setHasAccount,
+    hasAccount,
   }
 })

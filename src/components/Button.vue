@@ -3,7 +3,7 @@ const props = defineProps({
   type: { type: String, default: 'button' },
   variant: { type: String, default: 'primary' },
   heightBtn: { type: String, default: '48px' },
-  disabled: { type: String, default: false },
+  disabled: { type: Boolean, default: false },
 })
 const emit = defineEmits(['press'])
 </script>
