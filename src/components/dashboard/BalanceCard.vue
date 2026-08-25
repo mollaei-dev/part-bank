@@ -18,7 +18,11 @@ const cardParts = computed(() => {
 const formatToPersian = (str) => {
   return str.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d])
 }
-
+function handleMenuAction(action) {
+  if (action === 'delete-account') {
+    emit('deleteAccount')
+  }
+}
 </script>
 <template>
   <div class="balance-card">
@@ -30,6 +34,7 @@ const formatToPersian = (str) => {
         alt="گزینه ها"
       />
       <ActionMenu
+        @select="handleMenuAction"
         :menuItems="menuItems"
         class="balance-card__menu"
         :class="{ 'balance-card__menu--isopen': isMenuOpen }"

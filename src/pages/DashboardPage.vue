@@ -37,25 +37,39 @@ onMounted(async () => {
     }
   }
 })
+function deleteAccount() {
+  userStore.setHasAccount(false)
+  userStore.userInfo = []
+  account.value = []
+  transactions.value = []
+  localStorage.removeItem('userInfo')
+  localStorage.removeItem('hasAccount')
+}
 </script>
 <template>
   <div class="dashboard">
     <Sidebar />
     <div class="dashboard__content">
       <div class="dashboard__cards">
-        <BalanceCard :card-balance="cardBalance" :card-number="cardNumber" />
+        <BalanceCard
+          @deleteAccount="deleteAccount()"
+          :card-balance="cardBalance"
+          :card-number="cardNumber"
+        />
         <BaseCard card-title="امتیاز حساب" btn-label="محاسبه امتیاز" :metaIcon="infoCircle">
           <template #content>
             <div class="card-content">
               <p class="card-content__row">
                 <span class="card-content__amount">{{
-                  Number(account?.score?.amount).toLocaleString('fa-IR') || 0
-                }}</span>ریال
+                  Number(account?.score?.amount ?? 0).toLocaleString('fa-IR')
+                }}</span
+                >ریال
               </p>
               <p class="card-content__row">
                 <span class="card-content__duration">{{
-                  Number(account?.score?.durationMonth).toLocaleString('fa-IR') || 0
-                }}</span>ماهه
+                  Number(account?.score?.durationMonth ?? 0).toLocaleString('fa-IR')
+                }}</span
+                >ماهه
               </p>
             </div>
           </template>
@@ -72,7 +86,7 @@ onMounted(async () => {
               <p class="card-details__row">
                 مبلغ قسط:
                 <span class="card-details__amount">{{
-                  Number(account?.nextInstallment?.amount).toLocaleString('fa-IR') || 0
+                  Number(account?.nextInstallment?.amount ?? 0).toLocaleString('fa-IR')
                 }}</span>
               </p>
               <p class="card-details__row">
