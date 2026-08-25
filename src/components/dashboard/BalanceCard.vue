@@ -1,7 +1,16 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import ActionMenu from '../ActionMenu.vue'
+import editIcon from '@/assets/images/icons/convert-card.png'
+import deleteIcon from '@/assets/images/icons/dalete-accountn.png'
 
 const props = defineProps(['cardBalance', 'cardNumber'])
+const emit = defineEmits(['deleteAccount'])
+const isMenuOpen = ref(false)
+const menuItems = [
+  { icon: editIcon, label: 'تغییر حساب متصل', action: 'edit-account', disabled: true },
+  { icon: deleteIcon, label: 'حذف حساب بانکی', action: 'delete-account', danger: true },
+]
 
 const cardParts = computed(() => {
   return props.cardNumber.match(/.{4}/g) || []
@@ -9,12 +18,22 @@ const cardParts = computed(() => {
 const formatToPersian = (str) => {
   return str.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d])
 }
+
 </script>
 <template>
   <div class="balance-card">
     <div class="balance-card__header">
-      <img class="balance-card__icon" src="@/assets/images/icons/more-card.png" alt="گزینه ها" />
-
+      <img
+        @click="isMenuOpen = !isMenuOpen"
+        class="balance-card__icon"
+        src="@/assets/images/icons/more-card.png"
+        alt="گزینه ها"
+      />
+      <ActionMenu
+        :menuItems="menuItems"
+        class="balance-card__menu"
+        :class="{ 'balance-card__menu--isopen': isMenuOpen }"
+      />
       <div class="balance-card__amount">
         <h4 class="balance-card__label">موجودی کل</h4>
         <div class="balance-card__amount--value">
@@ -32,6 +51,7 @@ const formatToPersian = (str) => {
 <style lang="scss">
 @use '@/styles/mixins' as *;
 .balance-card {
+  position: relative;
   width: 456px;
   min-width: 320px;
   max-width: 456px;
@@ -51,6 +71,18 @@ const formatToPersian = (str) => {
   }
   &__icon {
     cursor: pointer;
+  }
+  &__menu {
+    position: absolute;
+    top: 72px;
+    right: 36px;
+    width: 187px;
+    height: 88px;
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+    &--isopen {
+      opacity: 1;
+    }
   }
   &__amount {
     //wrapper
