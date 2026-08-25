@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useUserStore } from '@/stores/userStore'
 import { useToast } from 'vue-toastification'
 import { ref, computed } from 'vue'
+import AccountPrompt from '@/components/dashboard/AccountPrompt.vue'
 
 const userStore = useUserStore()
 const toast = useToast()
@@ -49,59 +50,65 @@ function deleteAccount() {
 <template>
   <div class="dashboard">
     <Sidebar />
-    <div class="dashboard__content">
-      <div class="dashboard__cards">
-        <BalanceCard
-          @deleteAccount="deleteAccount()"
-          :card-balance="cardBalance"
-          :card-number="cardNumber"
-        />
-        <BaseCard card-title="امتیاز حساب" btn-label="محاسبه امتیاز" :metaIcon="infoCircle">
-          <template #content>
-            <div class="card-content">
-              <p class="card-content__row">
-                <span class="card-content__amount">{{
-                  Number(account?.score?.amount ?? 0).toLocaleString('fa-IR')
-                }}</span
-                >ریال
-              </p>
-              <p class="card-content__row">
-                <span class="card-content__duration">{{
-                  Number(account?.score?.durationMonth ?? 0).toLocaleString('fa-IR')
-                }}</span
-                >ماهه
-              </p>
-            </div>
-          </template>
-        </BaseCard>
-        <BaseCard
-          card-title="قسط پیش رو"
-          btn-label="پرداخت"
-          metaLabel="جزئیات"
-          :metaIcon="vector"
-          :btnIcon="arrowLeft"
-        >
-          <template #details>
-            <div class="card-details">
-              <p class="card-details__row">
-                مبلغ قسط:
-                <span class="card-details__amount">{{
-                  Number(account?.nextInstallment?.amount ?? 0).toLocaleString('fa-IR')
-                }}</span>
-              </p>
-              <p class="card-details__row">
-                تاریخ سررسید:
-                <span class="card-details__duration">{{
-                  account?.nextInstallment?.dueDate
-                    ? new Date(account?.nextInstallment?.dueDate).toLocaleDateString('fa-IR')
-                    : '-'
-                }}</span>
-              </p>
-            </div>
-          </template>
-        </BaseCard>
+    <div class="dashboard__wrapper">
+      <AccountPrompt v-if="!userStore.hasAccount" />
+      <div
+        class="dashboard__content"
+        :class="{ 'dashboard__content--inactive': !userStore.hasAccount }"
+      >
+        <div class="dashboard__cards">
+          <BalanceCard
+            @deleteAccount="deleteAccount()"
+            :card-balance="cardBalance"
+            :card-number="cardNumber"
+          />
+          <BaseCard card-title="امتیاز حساب" btn-label="محاسبه امتیاز" :metaIcon="infoCircle">
+            <template #content>
+              <div class="card-content">
+                <p class="card-content__row">
+                  <span class="card-content__amount">{{
+                    Number(account?.score?.amount ?? 0).toLocaleString('fa-IR')
+                  }}</span
+                  >ریال
+                </p>
+                <p class="card-content__row">
+                  <span class="card-content__duration">{{
+                    Number(account?.score?.durationMonth ?? 0).toLocaleString('fa-IR')
+                  }}</span
+                  >ماهه
+                </p>
+              </div>
+            </template>
+          </BaseCard>
+          <BaseCard
+            card-title="قسط پیش رو"
+            btn-label="پرداخت"
+            metaLabel="جزئیات"
+            :metaIcon="vector"
+            :btnIcon="arrowLeft"
+          >
+            <template #details>
+              <div class="card-details">
+                <p class="card-details__row">
+                  مبلغ قسط:
+                  <span class="card-details__amount">{{
+                    Number(account?.nextInstallment?.amount ?? 0).toLocaleString('fa-IR')
+                  }}</span>
+                </p>
+                <p class="card-details__row">
+                  تاریخ سررسید:
+                  <span class="card-details__duration">{{
+                    account?.nextInstallment?.dueDate
+                      ? new Date(account?.nextInstallment?.dueDate).toLocaleDateString('fa-IR')
+                      : '-'
+                  }}</span>
+                </p>
+              </div>
+            </template>
+          </BaseCard>
+        </div>
+        <div class="dashboard__transaction"></div>
       </div>
-      <div class="dashboard__transaction"></div>
     </div>
   </div>
 </template>
@@ -116,6 +123,10 @@ function deleteAccount() {
   background-color: #f7f8fa;
   padding: 0;
   gap: 16px;
+  &__wrapper {
+    position: relative;
+    width: 100%;
+  }
   &__cards {
     display: flex;
     gap: 16px;
@@ -127,7 +138,7 @@ function deleteAccount() {
     flex-direction: column;
     gap: 24px;
     &--inactive {
-      opacity: 0.09;
+      opacity: 0.15;
       pointer-events: none;
     }
   }
