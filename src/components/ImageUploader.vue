@@ -121,11 +121,12 @@ function handleMenuAction(action) {
   border-radius: 12px;
   &__dropzone {
     position: relative;
-    text-align: center;
     width: 100%;
     height: 180px;
     border-radius: 12px 12px 0 0;
     cursor: pointer;
+    @include flex(column, center, center);
+
     &-border {
       display: block;
       position: absolute;
