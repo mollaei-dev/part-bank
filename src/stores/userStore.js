@@ -14,6 +14,15 @@ export const useUserStore = defineStore('user', () => {
     currentUser.value = user
     localStorage.setItem('currentUser', JSON.stringify(user))
   }
+  function logOut() {
+    currentUser.value = null
+    userInfo.value = null
+    hasAccount.value = false
+    localStorage.removeItem('currentUser')
+    localStorage.removeItem('token')
+    localStorage.removeItem('hasAccount')
+    localStorage.removeItem('userInfo')
+  }
   function saveInfo(formData) {
     userInfo.value = {
       ...userInfo.value,
@@ -61,5 +70,6 @@ export const useUserStore = defineStore('user', () => {
     activateDemoMode,
     setHasAccount,
     hasAccount,
+    logOut
   }
 })
