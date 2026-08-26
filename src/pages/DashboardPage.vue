@@ -11,10 +11,12 @@ import { useUserStore } from '@/stores/userStore'
 import { useToast } from 'vue-toastification'
 import { ref, computed } from 'vue'
 import AccountPrompt from '@/components/dashboard/AccountPrompt.vue'
+import Table from '@/components/dashboard/Table.vue'
 
 const userStore = useUserStore()
 const toast = useToast()
 const account = ref({})
+const transactions = ref([])
 const cardNumber = computed(() => account.value?.accountNumber ?? '')
 const cardBalance = computed(() => account.value?.balance ?? 0)
 
@@ -29,6 +31,7 @@ onMounted(async () => {
     if (!userStore.currentUser) userStore.setCurrentUser(response.data.user)
     if (userStore.hasAccount) {
       account.value = response.data.accounts[0]
+      transactions.value = response.data.transactions
     }
   } catch (error) {
     if (!error.response) {
@@ -107,7 +110,17 @@ function deleteAccount() {
             </template>
           </BaseCard>
         </div>
-        <div class="dashboard__transaction"></div>
+        <div class="transactions">
+          <div class="transactions__header">
+            <h4 class="transactions__title">
+              لیست تراکنش‌ها
+              <span class="transactions__title--unit">(ریال)</span>
+            </h4>
+            <div class="transactions__controls">
+            </div>
+          </div>
+          <Table v-if="userStore.hasAccount" :transactions="transactions"></Table>
+        </div>
       </div>
     </div>
   </div>
@@ -176,6 +189,35 @@ function deleteAccount() {
     font-weight: 600;
     font-size: 14px;
     color: #3c4351;
+  }
+}
+.transactions {
+  width: 100%;
+  height: 520px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  &__header {
+    width: 100%;
+    height: 38px;
+    @include flex(row, space-between, center);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #3c4351;
+    &--unit {
+      font-weight: 400;
+      font-size: 16px;
+      color: #8999b9;
+    }
+  }
+  &__controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
   }
 }
 </style>
