@@ -12,6 +12,7 @@ import { useToast } from 'vue-toastification'
 import { ref, computed } from 'vue'
 import AccountPrompt from '@/components/dashboard/AccountPrompt.vue'
 import Table from '@/components/dashboard/Table.vue'
+import Search from '@/components/dashboard/Search.vue'
 
 const userStore = useUserStore()
 const toast = useToast()
@@ -49,6 +50,15 @@ function deleteAccount() {
   localStorage.removeItem('userInfo')
   localStorage.removeItem('hasAccount')
 }
+
+const searchQuery = ref('')
+function setSearchQuery(value) {
+  searchQuery.value = value
+}
+const filteredTransactions = computed(() => {
+  if (!searchQuery.value) return transactions.value
+  return transactions.value.filter((t) => t.type.includes(searchQuery.value))
+})
 </script>
 <template>
   <div class="dashboard">
@@ -117,9 +127,10 @@ function deleteAccount() {
               <span class="transactions__title--unit">(ریال)</span>
             </h4>
             <div class="transactions__controls">
+              <Search @searchInput="setSearchQuery" />
             </div>
           </div>
-          <Table v-if="userStore.hasAccount" :transactions="transactions"></Table>
+          <Table v-if="userStore.hasAccount" :transactions="filteredTransactions"></Table>
         </div>
       </div>
     </div>

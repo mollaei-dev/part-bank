@@ -1,10 +1,13 @@
 <script setup>
 import search from '@/assets/images/icons/search.png'
 import searchMute from '@/assets/images/icons/Search-mute.png'
-import { ref } from 'vue'
+import { ref, watch, defineEmits } from 'vue'
 
 const searchQuery = ref()
 const isOpenSearch = ref(false)
+
+const emit = defineEmits(['searchInput'])
+watch(searchQuery, (value) => emit('searchInput', value))
 </script>
 <template>
   <div class="search" :class="{ 'search--isOpen': isOpenSearch }">
