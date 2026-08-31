@@ -13,6 +13,7 @@ import { ref, computed } from 'vue'
 import AccountPrompt from '@/components/dashboard/AccountPrompt.vue'
 import Table from '@/components/dashboard/Table.vue'
 import Search from '@/components/dashboard/Search.vue'
+import Sort from '@/components/dashboard/Sort.vue'
 
 const userStore = useUserStore()
 const toast = useToast()
@@ -59,6 +60,16 @@ const filteredTransactions = computed(() => {
   if (!searchQuery.value) return transactions.value
   return transactions.value.filter((t) => t.type.includes(searchQuery.value))
 })
+
+const sortType = ref('')
+const sortedTransactions = computed(() => {
+  if (sortType.value === 'همه') return filteredTransactions.value
+  return [
+    ...filteredTransactions.value.filter((t) => t.type === sortType.value),
+    ...filteredTransactions.value.filter((t) => t.type !== sortType.value),
+  ]
+})
+
 </script>
 <template>
   <div class="dashboard">
@@ -127,10 +138,11 @@ const filteredTransactions = computed(() => {
               <span class="transactions__title--unit">(ریال)</span>
             </h4>
             <div class="transactions__controls">
+              <Sort @change-sort="(value) => (sortType = value)" />
               <Search @searchInput="setSearchQuery" />
             </div>
           </div>
-          <Table v-if="userStore.hasAccount" :transactions="filteredTransactions"></Table>
+          <Table v-if="userStore.hasAccount" :transactions="sortedTransactions"></Table>
         </div>
       </div>
     </div>
