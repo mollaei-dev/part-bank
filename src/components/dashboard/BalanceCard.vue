@@ -18,6 +18,10 @@ const cardParts = computed(() => {
 const formatToPersian = (str) => {
   return str.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d])
 }
+
+function closeActionMenu() {
+  isMenuOpen.value = false
+}
 function handleMenuAction(action) {
   if (action === 'delete-account') {
     emit('deleteAccount')
@@ -30,6 +34,7 @@ function handleMenuAction(action) {
       <img
         @click="isMenuOpen = !isMenuOpen"
         class="balance-card__icon"
+        v-click-outside="closeActionMenu"
         src="@/assets/images/icons/more-card.png"
         alt="گزینه ها"
       />

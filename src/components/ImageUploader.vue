@@ -16,6 +16,9 @@ const menuItems = [
   { icon: editIcon, label: 'ویرایش', action: 'edit-image' },
   { icon: deleteIcon, label: 'حذف', action: 'delete-image', danger: true },
 ]
+function closeActionMenu() {
+  isMenuOpen.value = false
+}
 const priviewUrl = computed(() =>
   props.side === 'front' ? userStore.userInfo.frontCardImage : userStore.userInfo.backCardImage,
 )
@@ -97,6 +100,7 @@ function handleMenuAction(action) {
       <img
         class="upload__menu-icon"
         @click="isMenuOpen = !isMenuOpen"
+        v-click-outside="closeActionMenu"
         :hidden="!priviewUrl"
         src="@/assets/images/icons/more.png"
         alt="menu"

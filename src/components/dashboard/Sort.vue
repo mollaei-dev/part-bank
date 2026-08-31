@@ -10,6 +10,10 @@ function selectOption(option) {
   emit('changeSort', option)
   isOpenSort.value = false
 }
+
+function closeSortMenu() {
+  isOpenSort.value = false
+}
 </script>
 <template>
   <div class="sort">
@@ -17,7 +21,7 @@ function selectOption(option) {
       <img class="sort__label-icon" src="@/assets/images/icons/sort.png" />
       <span class="sort__label-text"> مرتب سازی:</span>
     </div>
-    <div class="sort__dropdown">
+    <div class="sort__dropdown" v-click-outside="closeSortMenu">
       <div
         class="sort__dropdown-header"
         @click="isOpenSort = !isOpenSort"

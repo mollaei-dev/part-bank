@@ -7,11 +7,13 @@ import '@/styles/main.scss'
 
 import 'vue-toastification/dist/index.css'
 import Toast, { POSITION } from 'vue-toastification'
+import clickOutside from './directives/clickOutside.js'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.directive('click-outside', clickOutside)
 app.use(Toast, {
   position: POSITION.BOTTOM_RIGHT,
   timeout: 2000,
