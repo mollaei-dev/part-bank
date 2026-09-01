@@ -9,11 +9,12 @@ import { onMounted } from 'vue'
 import axios from 'axios'
 import { useUserStore } from '@/stores/userStore'
 import { useToast } from 'vue-toastification'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import AccountPrompt from '@/components/dashboard/AccountPrompt.vue'
 import Table from '@/components/dashboard/Table.vue'
 import Search from '@/components/dashboard/Search.vue'
 import Sort from '@/components/dashboard/Sort.vue'
+import Pagination from '@/components/dashboard/Pagination.vue'
 
 const userStore = useUserStore()
 const toast = useToast()
@@ -62,6 +63,9 @@ const filteredTransactions = computed(() => {
 })
 
 const sortType = ref('')
+watch(sortType, () => {
+  currentPage.value = 1
+})
 const sortedTransactions = computed(() => {
   if (sortType.value === 'همه') return filteredTransactions.value
   return [
@@ -70,6 +74,14 @@ const sortedTransactions = computed(() => {
   ]
 })
 
+//pagination
+const currentPage = ref(1)
+const pageSize = 5
+const totalPages = computed(() => Math.ceil(sortedTransactions.value.length / pageSize))
+const paginatedTransactions = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  return sortedTransactions.value.slice(start, start + pageSize)
+})
 </script>
 <template>
   <div class="dashboard">
@@ -142,7 +154,13 @@ const sortedTransactions = computed(() => {
               <Search @searchInput="setSearchQuery" />
             </div>
           </div>
-          <Table v-if="userStore.hasAccount" :transactions="sortedTransactions"></Table>
+          <Table v-if="userStore.hasAccount" :transactions="paginatedTransactions"></Table>
+          <Pagination
+            v-if="totalPages > 1"
+            :totalPages="totalPages"
+            :currentPage="currentPage"
+            @changePage="(page) => (currentPage = page)"
+          />
         </div>
       </div>
     </div>
