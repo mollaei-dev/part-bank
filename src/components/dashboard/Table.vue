@@ -1,8 +1,10 @@
 <script setup>
 import arrowLeft from '@/assets/images/icons/arrow-left.png'
 import arrowRight from '@/assets/images/icons/arrow-right.png'
-
+import { computed } from 'vue'
 const props = defineProps(['transactions'])
+const emptyRow = computed(() => (props.transactions.length < 5 ? 5 - props.transactions.length : 0))
+
 </script>
 <template>
   <table class="table">
@@ -14,7 +16,12 @@ const props = defineProps(['transactions'])
       </tr>
     </thead>
     <tbody class="table__body">
-      <tr class="table__row" v-for="item in transactions" :key="item.id">
+      <tr
+        class="table__row"
+        :class="{ 'table__row--hilight': index % 2 !== 0 }"
+        v-for="(item, index) in transactions"
+        :key="item.id"
+      >
         <td class="table__data table__data--type">
           <img :src="item.type === 'واریز' ? arrowLeft : arrowRight" />
           {{ item.type }}
@@ -24,6 +31,11 @@ const props = defineProps(['transactions'])
           {{ new Date(item.date).toLocaleDateString('fa-IR') }}
         </td>
         <td class="table__data">{{ item.amount.toLocaleString('fa-IR') }}</td>
+      </tr>
+      <tr v-for="index in emptyRow" :key="index" class="table__row">
+        <td class="table__data"></td>
+        <td class="table__data"></td>
+        <td class="table__data"></td>
       </tr>
     </tbody>
   </table>
@@ -37,7 +49,7 @@ td {
 }
 .table {
   width: 100%;
-  height: 380px;
+  min-height: 380px;
   border-spacing: 0 0;
   &__head {
     height: 60px;
@@ -59,11 +71,18 @@ td {
       }
     }
   }
+  &__body {
+    // display: block;
+    // height: auto;
+  }
   &__row {
     width: 100%;
     height: 61px;
     border-radius: 8px;
     text-align: center;
+    &--hilight {
+      background-color: #f9fafb;
+    }
   }
   &__data {
     font-weight: 600;
