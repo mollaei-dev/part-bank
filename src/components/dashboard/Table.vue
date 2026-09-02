@@ -71,10 +71,6 @@ td {
       }
     }
   }
-  &__body {
-    // display: block;
-    // height: auto;
-  }
   &__row {
     width: 100%;
     height: 61px;

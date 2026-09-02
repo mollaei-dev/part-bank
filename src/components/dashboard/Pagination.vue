@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue'
+import { computed, defineProps, ref } from 'vue'
 
 const props = defineProps({
   totalPages: { type: Number, required: true },
@@ -7,13 +7,33 @@ const props = defineProps({
 })
 const emit = defineEmits(['changePage'])
 
-
+const startPage = ref(1)
+const visiblePages = computed(() => {
+  const pages = []
+  for (let i = 0; i < 3; i++) {
+    const page = startPage.value + i
+    if (page <= props.totalPages) {
+      pages.push(page)
+    }
+  }
+  return pages
+})
 
 function goBack() {
-  if (props.currentPage > 1) emit('changePage', props.currentPage - 1)
+  if (props.currentPage > 1) {
+    emit('changePage', props.currentPage - 1)
+    if (props.currentPage - 1 < startPage.value) {
+      startPage.value--
+    }
+  }
 }
 function goNext() {
-  if (props.currentPage < props.totalPages) emit('changePage', props.currentPage + 1)
+  if (props.currentPage < props.totalPages) {
+    emit('changePage', props.currentPage + 1)
+    if (props.currentPage + 1 > startPage.value + 2) {
+      startPage.value++
+    }
+  }
 }
 </script>
 <template>
@@ -21,29 +41,15 @@ function goNext() {
     <button @click="goBack()" class="pagination__btn">
       <img src="@/assets/images/icons/vectorRight.png" />
     </button>
-    <!-- <button
-      class="pagination__btn"
-      :class="{ 'pagination__btn--active': props.currentPage === page }"
-      v-for="page in totalPages"
-      :key="page"
-      @click="emit('changePage', page)"
-    >
-      {{ page.toLocaleString('fa-IR') }}
-    </button> -->
     <button
       class="pagination__btn"
       :class="{ 'pagination__btn--active': props.currentPage === page }"
-      v-for="page in 3"
+      v-for="page in visiblePages"
       :key="page"
       @click="emit('changePage', page)"
     >
       {{ page.toLocaleString('fa-IR') }}
-    </button> 
-    <!-- <button
-      class="pagination__btn"
-      :class="{ 'pagination__btn--active': props.currentPage === page }">
-    
-    </button> -->
+    </button>
     <button @click="goNext()" class="pagination__btn">
       <img src="@/assets/images/icons/vectorLeft.png" />
     </button>
