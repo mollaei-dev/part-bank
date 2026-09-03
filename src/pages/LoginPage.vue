@@ -32,6 +32,7 @@ async function loginHandle(formData) {
     localStorage.setItem('token', token)
     router.replace({ name: 'dashboard' })
   } catch (error) {
+    //Switch to demo mode if server is unreachable
     if (!error.response) {
       await userStore.activateDemoMode()
       router.replace({ name: 'dashboard' })
@@ -104,7 +105,7 @@ async function loginHandle(formData) {
     background-color: #fff;
     box-shadow: 0px 0px 4px 0px #0043650d;
     border-radius: 20px;
-    max-width: 1200px; //new
+    max-width: 1200px;
     width: 65%;
     max-height: 840px;
     height: auto;
@@ -118,10 +119,10 @@ async function loginHandle(formData) {
   }
   &__logo {
     width: 46%;
-    max-width: 279px; //new
+    max-width: 279px;
     height: auto;
     margin-top: 50px;
-    margin-bottom: 128px; //new
+    margin-bottom: 128px;
   }
   &__form {
     @include flex(column, center, stretch);
@@ -163,7 +164,7 @@ async function loginHandle(formData) {
   }
 }
 
-/* Responsive */
+//Responsive
 @media only screen and (max-width: 1200px) {
   .login__container {
     width: 85%;
@@ -173,7 +174,7 @@ async function loginHandle(formData) {
   .login {
     &__container {
       width: 90%;
-      height: 550px; //jadidddddd
+      height: 550px;
     }
   }
 }
