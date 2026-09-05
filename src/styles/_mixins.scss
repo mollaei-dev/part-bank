@@ -1,3 +1,14 @@
+@mixin input-label-style($color, $font-size, $font-weight) {
+  color: $color;
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+@mixin input-field-style($height, $border, $bg-color, $font-size) {
+  height: $height;
+  border: $border;
+  background-color: $bg-color;
+  font-size: $font-size;
+}
 @mixin flex($direction, $justifyContent, $alignItem) {
   display: flex;
   flex-direction: $direction;

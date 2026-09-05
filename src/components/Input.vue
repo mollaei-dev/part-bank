@@ -38,6 +38,7 @@ const props = defineProps({
 </template>
 
 <style lang="scss">
+@use '@/styles/mixins' as *;
 .input {
   width: 100%;
   display: flex;
@@ -49,19 +50,13 @@ const props = defineProps({
     height: 22px;
     width: 100%;
     &--login {
-      color: #3c4351;
-      font-size: 16px;
-      font-weight: 400;
+      @include input-label-style(#3c4351, 16px, 400);
     }
     &--personal {
-      color: #8999b9;
-      font-size: 14px;
-      font-weight: 600;
+      @include input-label-style(#8999b9, 14px, 600);
     }
     &--confirm {
-      color: #8999b9;
-      font-size: 16px;
-      font-weight: 400;
+      @include input-label-style(#8999b9, 16px, 400);
     }
   }
   &__field {
@@ -75,21 +70,13 @@ const props = defineProps({
     width: 100%;
     border: none;
     &--login {
-      height: 48px;
-      background-color: #f9fafb;
-      font-size: 14px;
+      @include input-field-style(48px, none, #f9fafb, 14px);
     }
     &--personal {
-      height: 40px;
-      border: 1px solid #ececee;
-      background-color: #f9fafb;
-      font-size: 14px;
+      @include input-field-style(40px, 1px solid #ececee, #f9fafb, 14px);
     }
     &--confirm {
-      height: 22px;
-      border: none;
-      background-color: #fff;
-      font-size: 16px;
+      @include input-field-style(22px, none, #fff, 16px);
     }
     &--textarea-personal {
       height: 120px;
@@ -123,7 +110,7 @@ const props = defineProps({
   &__error {
     width: 100%;
     color: #eb482b;
-    font-weight: 4;
+    font-weight: 400;
     font-size: 12px;
     padding: 0 8px;
   }
