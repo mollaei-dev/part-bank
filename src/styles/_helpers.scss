@@ -40,3 +40,20 @@
     }
   }
 }
+
+//Responsive
+@media only screen and (max-width: 1600px) {
+  .page{
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .page__form-row {
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .page__form-buttons {
+    flex-wrap: wrap;
+  }
+}
