@@ -8,6 +8,7 @@ const props = defineProps({
   variant: String,
   type: { type: String, default: 'text' },
   rules: { type: [String, Object], default: null },
+  readonly: { type: Boolean, default: false },
 })
 </script>
 
@@ -26,6 +27,7 @@ const props = defineProps({
         :placeholder="placeHolder"
         :type="type"
         :rules="rules"
+        :readonly="readonly"
       >
       </Field>
       <slot name="icon"></slot>
