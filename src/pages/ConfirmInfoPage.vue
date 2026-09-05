@@ -17,7 +17,7 @@ function goBack() {
 async function handleSubmit() {
   loading.value = true
   try {
-    const response = await api.post('', {
+    const response = await api.post('/deposit-account', {
       firstName: userStore.userInfo.firstName,
       lastName: userStore.userInfo.lastName,
       postalCode: userStore.userInfo.postalCode,
@@ -25,9 +25,10 @@ async function handleSubmit() {
       nationalCardImage: userStore.userInfo.frontCardImage,
     })
     if (response.status === 201) {
-      router.push({ name: 'dashboard' })
+      router.replace({ name: 'dashboard' })
     }
   } catch (error) {
+    //Switch to demo mode if server is unreachable
     if (!error.response) {
       await userStore.activateDemoMode()
       userStore.setHasAccount(true)
