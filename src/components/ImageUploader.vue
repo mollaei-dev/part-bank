@@ -4,7 +4,6 @@ import { computed, ref, watch } from 'vue'
 import ActionMenu from './ActionMenu.vue'
 import editIcon from '@/assets/images/icons/edit.png'
 import deleteIcon from '@/assets/images/icons/trash.png'
-
 const props = defineProps(['side', 'isRequired'])
 const fileInput = ref(null)
 
@@ -64,8 +63,15 @@ function handleMenuAction(action) {
     isMenuOpen.value = false
   } else if (action === 'delete-image') {
     userStore.deleteCardImage(props.side)
-    priviewUrl.value = null
     isMenuOpen.value = false
+  }
+}
+
+function loadSampleImage() {
+  if (props.side === 'front') {
+    userStore.userInfo.frontCardImage = '/cardIdFront.png'
+  } else {
+    userStore.userInfo.backCardImage = '/cardIdBack.png'
   }
 }
 </script>
@@ -105,6 +111,9 @@ function handleMenuAction(action) {
         src="@/assets/images/icons/more.png"
         alt="menu"
       />
+      <button v-if="!priviewUrl" type="button" class="upload__sample-btn" @click="loadSampleImage">
+        بارگذاری نمونه
+      </button>
       <ActionMenu
         :menuItems="menuItems"
         @select="handleMenuAction"
@@ -117,6 +126,7 @@ function handleMenuAction(action) {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+
 .upload {
   position: relative;
   width: 320px;
@@ -191,6 +201,20 @@ function handleMenuAction(action) {
   &__menu {
     &-icon {
       cursor: pointer;
+    }
+  }
+  &__sample-btn {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+
+    &:hover {
+      background-color: #c4dff6;
     }
   }
   &__menu {
