@@ -3,7 +3,7 @@ import Button from '@/components/Button.vue'
 import ImageUploader from '@/components/ImageUploader.vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const router = useRouter()
 function goBack() {
@@ -12,14 +12,13 @@ function goBack() {
 const isRequiredFront = ref(false)
 const isRequiredBack = ref(false)
 
-function handleSubmit() {
+async function handleSubmit() {
   const userStore = useUserStore()
-
+  isRequiredFront.value = false
+  isRequiredBack.value = false
+  await nextTick()
   if (!userStore.userInfo.frontCardImage) isRequiredFront.value = true
-  else isRequiredFront.value = false
-
   if (!userStore.userInfo.backCardImage) isRequiredBack.value = true
-  else isRequiredBack.value = false
 
   if (userStore.userInfo.frontCardImage && userStore.userInfo.backCardImage)
     router.push({ name: 'confirm-info' })
