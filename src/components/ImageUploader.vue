@@ -92,10 +92,10 @@ function loadSampleImage() {
 
       <img v-if="priviewUrl" class="upload__priview" :src="priviewUrl" />
       <div v-else class="upload__placeholder">
-        <img class="upload__icon" src="@/assets/images/icons/upload.png" alt="upload" />
-        <p class="upload__text">
+        <img class="upload__placeholder-icon" src="@/assets/images/icons/upload.png" alt="upload" />
+        <p class="upload__placeholder-text">
           ? تصویر را بکشید و اینجا رها کنید <br />
-          یا <span>کلیک کنید</span>.
+          یا <span class="upload__placeholder-text--highlight">کلیک کنید</span>.
         </p>
       </div>
     </div>
@@ -104,7 +104,7 @@ function loadSampleImage() {
         {{ side === 'front' ? 'تصویر روی کارت ملی' : 'تصویر پشت کارت ملی' }}
       </p>
       <img
-        class="upload__menu-icon"
+        class="upload__icon-more"
         @click="isMenuOpen = !isMenuOpen"
         v-click-outside="closeActionMenu"
         :hidden="!priviewUrl"
@@ -173,20 +173,21 @@ function loadSampleImage() {
   &__placeholder {
     @include flex(column, center, center);
     gap: 8px;
-  }
-  &__icon {
-    width: 68px;
-    height: 50px;
-  }
-  &__text {
-    font-weight: 600;
-    font-size: 14px;
-    text-align: center;
-    color: #8999b9;
-    span {
-      color: #4152a0;
+    &-icon {
+      width: 68px;
+      height: 50px;
+    }
+    &-text {
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      color: #8999b9;
+      &--highlight {
+        color: #4152a0;
+      }
     }
   }
+
   &__footer {
     display: flex;
     justify-content: space-between;
@@ -198,10 +199,8 @@ function loadSampleImage() {
     font-size: 14px;
     color: #3c4351;
   }
-  &__menu {
-    &-icon {
-      cursor: pointer;
-    }
+  &__icon-more {
+    cursor: pointer;
   }
   &__sample-btn {
     background-color: #e3f2fd;
@@ -229,9 +228,6 @@ function loadSampleImage() {
     &--isopen {
       opacity: 1;
       pointer-events: auto;
-    }
-    &-icon {
-      cursor: pointer;
     }
   }
   &__error {
