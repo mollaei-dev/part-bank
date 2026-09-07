@@ -3,7 +3,6 @@ import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
 const delay = (ms) => new Promise((res) => setTimeout(res, ms))
 const toast = useToast()
-const demoUser = { firstName: 'محمدجواد', lastName: 'رحمانی نصب', idNumber: '0920125444' }
 
 export const useUserStore = defineStore('user', () => {
   const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')) || null)
@@ -55,7 +54,6 @@ export const useUserStore = defineStore('user', () => {
   async function activateDemoMode() {
     toast.error('خطا در برقراری ارتباط با سرور')
     localStorage.setItem('token', 'demoToken')
-    setCurrentUser(demoUser)
     await delay(3000)
     toast.info('حالت دمو فعال شد')
     await delay(2000)
