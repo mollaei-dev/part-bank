@@ -3,19 +3,11 @@
     "id": "user-1",
     "firstName": "محمد جواد",
     "lastName": "رحمانی نسب",
-    "idNumber": "0912345678",
-    "phoneNumber": "09123456789",
+    "idNumber": "09401232344",
+    "phoneNumber": "09156336778",
     "password": "Test123456",
-    "token": "mock-token-001"
+    "token": "demoToken"
   },
-  "depositAccount": {
-    "firstName": "",
-    "lastName": "",
-    "address": "",
-    "postalCode": "",
-    "nationalCardImage": ""
-  },
-
   "accounts": [
     {
       "id": "acc-1",
