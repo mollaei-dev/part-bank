@@ -9,7 +9,7 @@ const userStore = useUserStore()
 <template>
   <div class="profile">
     <h2 class="profile__name">
-      {{ userStore.currentUser.firstName }} {{ userStore.currentUser.lastName }}
+      {{ userStore.currentUser?.firstName }} {{ userStore.currentUser?.lastName }}
     </h2>
     <p class="profile__id">
       <label class="profile__id-label">کدملی:</label>
