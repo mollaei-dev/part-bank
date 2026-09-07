@@ -1,5 +1,5 @@
 <script setup>
-defineProps({ menuItems: { type: Array }, required: true })
+defineProps({ menuItems: { type: Array, required: true } })
 const emit = defineEmits(['select'])
 </script>
 <template>
@@ -20,11 +20,11 @@ const emit = defineEmits(['select'])
           >{{ item.label }}</span
         >
       </button>
-      <div v-if="index !== menuItems.length - 1" class="action-menu__divider"></div>
+      <div v-if="index !== menuItems.length - 1" class="divider"></div>
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/styles/mixins' as *;
 .action-menu {
   @include flex(column, flex-start, stretch);
@@ -38,6 +38,7 @@ const emit = defineEmits(['select'])
     gap: 8px;
     background-color: inherit;
     cursor: pointer;
+    margin-bottom: 12px;
     &--disabled {
       pointer-events: none;
     }
@@ -52,11 +53,6 @@ const emit = defineEmits(['select'])
     &--disabled {
       color: #c3c5c9;
       pointer-events: none;
-    }
-    &__divider {
-      height: 1px;
-      background-color: #e2edff;
-      margin-top: 12px;
     }
   }
 }
