@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+import { useUserStore } from '@/stores/userStore'
+
+function toPersianNumber(str) {
+  if (str === null || str === undefined) return ''
+  return str.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d])
+}
+const userStore = useUserStore()
+</script>
 <template>
   <div class="header">
     <div class="header-right">
@@ -10,7 +18,7 @@
 
       <div class="header__user-info">
         <img class="header__profile-image" src="@/assets/images/icons/avatar.svg" />
-        <p class="header__phone">09123456789</p>
+        <p class="header__phone">{{ toPersianNumber(userStore.currentUser?.phoneNumber) }}</p>
       </div>
     </div>
   </div>
