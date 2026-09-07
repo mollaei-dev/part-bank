@@ -50,4 +50,11 @@ async function handleSubmit() {
   gap: 40px;
   width: 100%;
 }
+
+//Responsive
+@media only screen and (max-width: 768px) {
+  .uploade-cards {
+    flex-wrap: wrap;
+  }
+}
 </style>
