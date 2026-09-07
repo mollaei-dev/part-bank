@@ -85,7 +85,7 @@ const paginatedTransactions = computed(() => {
 </script>
 <template>
   <div class="dashboard">
-    <Sidebar />
+    <Sidebar class="dashboard__sidebar" />
     <div class="dashboard__wrapper">
       <AccountPrompt v-if="!userStore.hasAccount" />
       <div
@@ -259,6 +259,13 @@ const paginatedTransactions = computed(() => {
     display: flex;
     gap: 12px;
     align-items: center;
+  }
+}
+
+// Responsive
+@media only screen and (max-width: 992px) {
+  .dashboard__sidebar {
+    display: none;
   }
 }
 </style>
