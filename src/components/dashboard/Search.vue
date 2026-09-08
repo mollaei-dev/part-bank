@@ -19,9 +19,9 @@ watch(searchQuery, (value) => emit('searchInput', value))
       placeholder="جستجو"
     />
     <div class="search__icon-wrapper">
-      <img class="search__icon" :src="search" />
+      <img class="search__icon-main" :src="search" />
       <img
-        class="search__icon--isOpen"
+        class="search__icon-toggle"
         @click="isOpenSearch = !isOpenSearch"
         :src="isOpenSearch ? search : searchMute"
       />
@@ -46,19 +46,17 @@ watch(searchQuery, (value) => emit('searchInput', value))
       display: block;
     }
   }
-  &__icon {
-    &--isOpen {
-      display: none;
-    }
-    &-wrapper {
-      width: 33px;
-      height: 32px;
-      text-align: center;
-      padding: 7px;
-      background-color: #eceef6;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-    }
+  &__icon-wrapper {
+    width: 33px;
+    height: 32px;
+    text-align: center;
+    padding: 7px;
+    background-color: #eceef6;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  &__icon-toggle {
+    display: none;
   }
 }
 </style>
