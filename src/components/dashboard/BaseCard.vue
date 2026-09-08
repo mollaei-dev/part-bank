@@ -1,5 +1,5 @@
 <script setup>
-import Button from '../Button.vue'
+import Button from '@/components/Button.vue'
 const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btnLabel'])
 </script>
 <template>
@@ -20,7 +20,7 @@ const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btn
           <img :src="btnIcon" />
         </template>
       </Button>
-    </div> 
+    </div>
   </div>
 </template>
 <style lang="scss">
@@ -52,11 +52,40 @@ const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btn
     font-weight: 400;
     font-size: 14px;
   }
-  &__meta-icon {
-  }
   &__footer {
     @include flex(column, flex-start, normal);
     gap: 20px;
+  }
+}
+
+// Responsive
+@media only screen and (max-width: 1440px) {
+  .card {
+    height: 240px;
+    &__title {
+      font-size: 18px;
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .card {
+    flex: 0;
+    flex-basis: 320px;
+    height: 220px;
+    &__title {
+      font-size: 16px;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .card {
+    flex-basis: 350px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .card {
+    flex-basis: 320px;
+    height: 180px;
   }
 }
 </style>
