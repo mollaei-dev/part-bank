@@ -4,7 +4,6 @@ import arrowRight from '@/assets/images/icons/arrow-right.png'
 import { computed } from 'vue'
 const props = defineProps(['transactions'])
 const emptyRow = computed(() => (props.transactions.length < 5 ? 5 - props.transactions.length : 0))
-
 </script>
 <template>
   <table class="table">
@@ -96,6 +95,21 @@ td {
     }
     &--type {
       @include flex(row, center, center);
+    }
+  }
+}
+// Responsive
+@media only screen and (max-width: 360px) {
+  .table {
+    &__head-title {
+      font-size: 14px;
+    }
+    &__data {
+      font-size: 14px;
+    }
+    &__icon {
+      width: 24px;
+      height: 24px;
     }
   }
 }
