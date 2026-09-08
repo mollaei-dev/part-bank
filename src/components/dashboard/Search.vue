@@ -59,4 +59,44 @@ watch(searchQuery, (value) => emit('searchInput', value))
     display: none;
   }
 }
+// Responsive
+@media only screen and (max-width: 992px) {
+  .search {
+    min-width: 0;
+    flex-basis: 200px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .search {
+    flex: 1;
+    border: none;
+    width: auto;
+    &--isOpen {
+      border: 1px solid #e2edff;
+      min-width: 183px;
+    }
+    &__input {
+      width: 0;
+      opacity: 0;
+      transition: opacity 600ms ease;
+      &--isOpen {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+    &__icon-main {
+      display: none;
+    }
+    &__icon-toggle {
+      display: block;
+      cursor: pointer;
+    }
+    &__icon-wrapper {
+      background-color: #ffffff;
+      &--isOpen {
+        background-color: #eceef6;
+      }
+    }
+  }
+}
 </style>
