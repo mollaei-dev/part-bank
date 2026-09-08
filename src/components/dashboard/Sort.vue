@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { defineEmits, ref } from 'vue'
 const emit = defineEmits(['changeSort'])
 const options = ['همه', 'واریز', 'برداشت']
-const selected = ref('')
+const selected = ref('همه')
 const isOpenSort = ref(false)
 
 function selectOption(option) {
@@ -89,9 +89,7 @@ function closeSortMenu() {
     width: 183px;
     &-header {
       height: 34px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex(row,space-between,center);
       border-radius: 8px;
       padding: 7px 8px 7px 4px;
       border: 1px solid #e2edff;
