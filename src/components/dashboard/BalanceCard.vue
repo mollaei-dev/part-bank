@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
-import ActionMenu from '../ActionMenu.vue'
+import ActionMenu from '@/components/ActionMenu.vue'
 import editIcon from '@/assets/images/icons/convert-card.png'
 import deleteIcon from '@/assets/images/icons/dalete-accountn.png'
 
@@ -95,17 +95,14 @@ function handleMenuAction(action) {
     }
   }
   &__amount {
-    //wrapper
     @include flex(column, flex-start, stretch);
     text-align: left;
     &--value {
-      //amount
       font-weight: 600;
       font-size: 40px;
     }
   }
   &__label {
-    //title
     font-weight: 600;
     font-size: 16px;
   }
@@ -115,6 +112,49 @@ function handleMenuAction(action) {
     font-weight: 400;
     font-size: 36px;
     gap: 16px;
+  }
+}
+// Responsive
+@media only screen and (max-width: 1440px) {
+  .balance-card {
+    height: 240px;
+    &__amount--value {
+      font-size: 36px;
+    }
+    &__number {
+      font-size: 32px;
+      gap: 12px;
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .balance-card {
+    flex: 0;
+    flex-basis: 320px;
+    height: 220px;
+    &__amount--value {
+      font-size: 32px;
+    }
+    &__number {
+      font-size: 28px;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .balance-card {
+    flex-basis: 350px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .balance-card {
+    flex-basis: 320px;
+    height: 180px;
+    &__amount--value {
+      font-size: 24px;
+    }
+    &__number {
+      font-size: 24px;
+    }
   }
 }
 </style>
