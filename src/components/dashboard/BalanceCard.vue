@@ -70,7 +70,7 @@ function handleMenuAction(action) {
   color: #ffffff;
   padding: 36px;
   padding-bottom: 32px;
-  @include flex(column, space-between, stretch);
+  @include flex(column, space-between);
   background:
     url('@/assets/images/noise.png') repeat,
     url('@/assets/images/pattern.png') repeat,
@@ -95,7 +95,7 @@ function handleMenuAction(action) {
     }
   }
   &__amount {
-    @include flex(column, flex-start, stretch);
+    @include flex(column);
     text-align: left;
     &--value {
       font-weight: 600;

@@ -9,7 +9,7 @@
   background-color: $bg-color;
   font-size: $font-size;
 }
-@mixin flex($direction, $justifyContent, $alignItem) {
+@mixin flex($direction: row, $justifyContent: flex-start, $alignItem: stretch) {
   display: flex;
   flex-direction: $direction;
   justify-content: $justifyContent;

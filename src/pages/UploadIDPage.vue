@@ -44,9 +44,9 @@ async function handleSubmit() {
 </template>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins' as *;
 .uploade-cards {
-  display: flex;
-  justify-content: center;
+  @include flex(row,center);
   gap: 40px;
   width: 100%;
 }

@@ -189,8 +189,7 @@ function loadSampleImage() {
   }
 
   &__footer {
-    display: flex;
-    justify-content: space-between;
+    @include flex(row, space-between);
     padding: 16px 12px;
     height: 52px;
   }

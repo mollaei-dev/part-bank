@@ -23,7 +23,7 @@ const userStore = useUserStore()
 @use '@/styles/mixins' as *;
 .profile {
   max-height: 116px;
-  @include flex(column, center, stretch);
+  @include flex(column, center);
   gap: 40px;
   &__name {
     height: 56px;

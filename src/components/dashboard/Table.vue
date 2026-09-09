@@ -54,7 +54,6 @@ td {
     height: 60px;
     color: #ffffff;
     background-color: #4152a0;
-    flex: 1;
     &-title {
       padding: 10px;
       font-weight: 600;

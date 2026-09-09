@@ -31,7 +31,7 @@ const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btn
   min-width: 320px;
   max-width: 338px;
   height: 260px;
-  @include flex(column, space-between, stretch);
+  @include flex(column, space-between);
   background: #ffffff;
   border-radius: 12px;
   padding: 24px;
@@ -53,7 +53,7 @@ const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btn
     font-size: 14px;
   }
   &__footer {
-    @include flex(column, flex-start, normal);
+    @include flex(column, flex-start);
     gap: 20px;
   }
 }

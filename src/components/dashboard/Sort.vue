@@ -66,8 +66,7 @@ function closeSortMenu() {
 .sort {
   width: 269px;
   height: 34px;
-  display: flex;
-  align-items: center;
+  @include flex(row, flex-start, center);
   gap: 8px;
   &__label {
     @include flex(row, center, center);
@@ -89,7 +88,7 @@ function closeSortMenu() {
     width: 183px;
     &-header {
       height: 34px;
-      @include flex(row,space-between,center);
+      @include flex(row, space-between, center);
       border-radius: 8px;
       padding: 7px 8px 7px 4px;
       border: 1px solid #e2edff;

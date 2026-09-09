@@ -43,8 +43,7 @@ const props = defineProps({
 @use '@/styles/mixins' as *;
 .input {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  @include flex(column);
   gap: 4px;
   &__label {
     padding-right: 8px;
@@ -100,10 +99,8 @@ const props = defineProps({
     }
     &-wrapper {
       position: relative;
-      display: flex;
-      justify-content: space-between;
+      @include flex(row, space-between, center);
       width: 100%;
-      align-items: center;
     }
   }
   &__error-wrapper {

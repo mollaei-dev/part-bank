@@ -101,7 +101,7 @@ async function loginHandle(formData) {
   width: 100%;
   min-height: 100vh;
   &__container {
-    @include flex(row, stretch, stretch);
+    @include flex(row, stretch);
     background-color: #fff;
     box-shadow: 0px 0px 4px 0px #0043650d;
     border-radius: 20px;
@@ -125,7 +125,7 @@ async function loginHandle(formData) {
     margin-bottom: 128px;
   }
   &__form {
-    @include flex(column, center, stretch);
+    @include flex(column, center);
     gap: 32px;
     width: 59%;
     max-width: 354px;
@@ -135,7 +135,7 @@ async function loginHandle(formData) {
     flex: 1;
   }
   &__input-wrapper {
-    @include flex(column, center, stretch);
+    @include flex(column, center);
     width: 100%;
     gap: 8px;
   }

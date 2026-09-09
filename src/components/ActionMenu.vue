@@ -27,7 +27,7 @@ const emit = defineEmits(['select'])
 <style lang="scss">
 @use '@/styles/mixins' as *;
 .action-menu {
-  @include flex(column, flex-start, stretch);
+  @include flex(column);
   box-shadow: 0px 0px 4px 0px #0043650d;
   background-color: #ffffff;
   padding: 12px;

@@ -76,7 +76,7 @@ function handleLogout() {
   opacity: 1;
   padding: 24px;
   background-color: #ffffff;
-  @include flex(column, flex-start, stretch);
+  @include flex(column);
   gap: 20px;
   &__list {
     list-style: none;

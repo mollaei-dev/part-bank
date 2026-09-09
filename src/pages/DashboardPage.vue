@@ -172,7 +172,7 @@ const paginatedTransactions = computed(() => {
 <style lang="scss">
 @use '@/styles/mixins' as *;
 .dashboard {
-  @include flex(row, center, stretch);
+  @include flex(row, center);
   margin: 108px auto;
   border-radius: 12px;
   max-width: 1400px;
@@ -185,14 +185,12 @@ const paginatedTransactions = computed(() => {
     width: 100%;
   }
   &__cards {
-    display: flex;
+    @include flex(row, center);
     gap: 16px;
-    justify-content: center;
   }
   &__content {
     min-width: 0;
-    display: flex;
-    flex-direction: column;
+    @include flex(column);
     gap: 24px;
     &--inactive {
       opacity: 0.15;
@@ -222,11 +220,10 @@ const paginatedTransactions = computed(() => {
   }
 }
 .card-details {
-  @include flex(column, flex-start, normal);
+  @include flex(column);
   gap: 12px;
   &__row {
-    display: flex;
-    justify-content: space-between;
+    @include flex(row, space-between);
     color: #8999b9;
     font-weight: 400;
     font-size: 14px;
@@ -262,9 +259,8 @@ const paginatedTransactions = computed(() => {
     }
   }
   &__controls {
-    display: flex;
+    @include flex(row, center);
     gap: 12px;
-    align-items: center;
   }
 }
 

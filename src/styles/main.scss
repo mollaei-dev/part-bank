@@ -45,8 +45,7 @@ select {
   border-radius: 16px;
   padding: 16px;
   background-color: #eb482b;
-  display: flex;
-  align-items: center;
+  @include flex(row,flex-start,center);
   gap: 8px;
   box-sizing: border-box;
 }
