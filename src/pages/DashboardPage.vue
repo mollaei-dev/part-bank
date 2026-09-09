@@ -56,6 +56,7 @@ function deleteAccount() {
 const searchQuery = ref('')
 function setSearchQuery(value) {
   searchQuery.value = value
+  currentPage.value = 1
 }
 const filteredTransactions = computed(() => {
   if (!searchQuery.value) return transactions.value
