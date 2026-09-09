@@ -53,6 +53,7 @@ function deleteAccount() {
   localStorage.removeItem('hasAccount')
 }
 
+//search
 const searchQuery = ref('')
 function setSearchQuery(value) {
   searchQuery.value = value
@@ -63,6 +64,7 @@ const filteredTransactions = computed(() => {
   return transactions.value.filter((t) => t.type.includes(searchQuery.value))
 })
 
+//sort
 const sortType = ref('')
 watch(sortType, () => {
   currentPage.value = 1
