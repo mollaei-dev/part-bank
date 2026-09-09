@@ -227,6 +227,9 @@ const paginatedTransactions = computed(() => {
   &__row {
     display: flex;
     justify-content: space-between;
+    color: #8999b9;
+    font-weight: 400;
+    font-size: 14px;
   }
   &__amount,
   &__duration {
