@@ -265,9 +265,60 @@ const paginatedTransactions = computed(() => {
 }
 
 // Responsive
+@media only screen and (max-width: 1600px) {
+  .dashboard {
+    max-width: 1350px;
+  }
+}
+@media only screen and (max-width: 1440px) {
+  .dashboard {
+    max-width: 1250px;
+    &__content {
+      gap: 16px;
+    }
+    &__cards {
+      gap: 12px;
+    }
+  }
+  .card-content__amount {
+    font-size: 36px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .dashboard {
+    max-width: 1050px;
+    &__cards {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  }
+  .transactions__title {
+    font-size: 18px;
+  }
+}
+
 @media only screen and (max-width: 992px) {
-  .dashboard__sidebar {
-    display: none;
+  .dashboard {
+    width: 95%;
+    &__sidebar {
+      display: none;
+    }
+  }
+  .transactions__title {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .dashboard__cards {
+    gap: 16px;
+  }
+  .transactions__controls {
+    gap: 0;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .card-content__amount {
+    font-size: 32px;
   }
 }
 </style>
