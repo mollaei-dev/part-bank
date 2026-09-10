@@ -19,6 +19,8 @@ const emit = defineEmits(['press'])
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .btn {
   cursor: pointer;
   width: 100%;
@@ -43,12 +45,12 @@ const emit = defineEmits(['press'])
     cursor: not-allowed;
   }
   &--primary {
-    background-color: #4152a0;
-    color: #ffffff;
+    background-color: $primary-color;
+    color: $surface-color;
   }
   &--secondary {
-    background-color: #eceef6;
-    color: #3c4351;
+    background-color: $secondary-background-color;
+    color: $text-color;
   }
 }
 </style>

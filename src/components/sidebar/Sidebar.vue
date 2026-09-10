@@ -67,6 +67,7 @@ function handleLogout() {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
 
 .sidebar {
   max-width: 220px;
@@ -75,7 +76,7 @@ function handleLogout() {
   border-radius: 12px;
   opacity: 1;
   padding: 24px;
-  background-color: #ffffff;
+  background-color: $surface-color;
   @include flex(column);
   gap: 20px;
   &__list {
@@ -92,14 +93,14 @@ function handleLogout() {
     @include flex(row, flex-start, center);
     gap: 8px;
     &--active {
-      background-color: #f9fafb;
+      background-color: $background-secondary-color;
     }
     &--logout {
       &:hover {
         background-color: #fdedea;
       }
       &:active {
-        background-color: #eb482b;
+        background-color: $error-color;
       }
     }
   }
@@ -109,19 +110,19 @@ function handleLogout() {
     text-decoration: none;
     font-weight: 400;
     font-size: 14px;
-    color: #8999b9;
+    color: $text-secondary-color;
     background-color: inherit;
     &--logout {
       font: inherit;
-      color: #eb482b;
+      color: $error-color;
       border: none;
       cursor: pointer;
       &:active {
-        color: #ffffff;
+        color: $surface-color;
       }
     }
     &--active {
-      color: #4152a0;
+      color: $primary-color;
       font-weight: 700;
     }
   }

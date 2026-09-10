@@ -19,6 +19,7 @@ function openAccount() {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
 
 .prompt {
   position: absolute;
@@ -33,7 +34,7 @@ function openAccount() {
   &__text {
     font-weight: 600;
     font-size: 16px;
-    color: #3c4351;
+    color: $text-color;
     width: 100%;
   }
   &__button {

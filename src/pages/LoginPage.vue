@@ -94,6 +94,8 @@ async function loginHandle(formData) {
 </template>
 <style lang="scss" scoped>
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .login {
   @include flex(row, center, center);
   background: url('@/assets/images/BG-Image.png');
@@ -102,7 +104,7 @@ async function loginHandle(formData) {
   min-height: 100vh;
   &__container {
     @include flex(row, stretch);
-    background-color: #fff;
+    background-color: $surface-color;
     box-shadow: 0px 0px 4px 0px #0043650d;
     border-radius: 20px;
     max-width: 1200px;
@@ -151,7 +153,7 @@ async function loginHandle(formData) {
     margin-top: auto;
     font-size: 14px;
     font-weight: 400;
-    color: #3c4351;
+    color: $text-color;
   }
   &__left {
     flex: 1 1 50%;

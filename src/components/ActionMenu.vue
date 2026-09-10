@@ -26,10 +26,12 @@ const emit = defineEmits(['select'])
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .action-menu {
   @include flex(column);
   box-shadow: 0px 0px 4px 0px #0043650d;
-  background-color: #ffffff;
+  background-color: $surface-color;
   padding: 12px;
   border-radius: 12px;
   gap: 12px;
@@ -46,12 +48,12 @@ const emit = defineEmits(['select'])
   &__label {
     font-weight: 400;
     font-size: 14px;
-    color: #3c4351;
+    color: $text-color;
     &--danger {
-      color: #eb482b;
+      color: $error-color;
     }
     &--disabled {
-      color: #c3c5c9;
+      color: $muted-color;
       pointer-events: none;
     }
   }

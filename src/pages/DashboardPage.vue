@@ -171,13 +171,15 @@ const paginatedTransactions = computed(() => {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .dashboard {
   @include flex(row, center);
   margin: 108px auto;
   border-radius: 12px;
   max-width: 1400px;
   width: 100%;
-  background-color: #f7f8fa;
+  background-color: $background-color;
   padding: 0;
   gap: 16px;
   &__wrapper {
@@ -204,17 +206,17 @@ const paginatedTransactions = computed(() => {
   &__row {
     @include flex(row, center, center);
     gap: 4px;
-    color: #8999b9;
+    color: $text-secondary-color;
     font-weight: 400;
     font-size: 14px;
   }
   &__amount {
-    color: #4152a0;
+    color: $primary-color;
     font-size: 40px;
     font-weight: 700;
   }
   &__duration {
-    color: #4152a0;
+    color: $primary-color;
     font-weight: 700;
     font-size: 18px;
   }
@@ -224,7 +226,7 @@ const paginatedTransactions = computed(() => {
   gap: 12px;
   &__row {
     @include flex(row, space-between);
-    color: #8999b9;
+    color: $text-secondary-color;
     font-weight: 400;
     font-size: 14px;
   }
@@ -232,13 +234,13 @@ const paginatedTransactions = computed(() => {
   &__duration {
     font-weight: 600;
     font-size: 14px;
-    color: #3c4351;
+    color: $text-color;
   }
 }
 .transactions {
   width: 100%;
   height: 520px;
-  background-color: #ffffff;
+  background-color: $surface-color;
   border-radius: 12px;
   padding: 24px;
   &__header {
@@ -251,11 +253,11 @@ const paginatedTransactions = computed(() => {
   &__title {
     font-size: 20px;
     font-weight: 700;
-    color: #3c4351;
+    color: $text-color;
     &--unit {
       font-weight: 400;
       font-size: 16px;
-      color: #8999b9;
+      color: $text-secondary-color;
     }
   }
   &__controls {

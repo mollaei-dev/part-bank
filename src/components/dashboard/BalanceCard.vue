@@ -60,6 +60,8 @@ function handleMenuAction(action) {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .balance-card {
   position: relative;
   width: 456px;
@@ -67,14 +69,14 @@ function handleMenuAction(action) {
   max-width: 456px;
   height: 260px;
   border-radius: 12px;
-  color: #ffffff;
+  color: $surface-color;
   padding: 36px;
   padding-bottom: 32px;
   @include flex(column, space-between);
   background:
     url('@/assets/images/noise.png') repeat,
     url('@/assets/images/pattern.png') repeat,
-    linear-gradient(112deg, #4152a0, #d0c9c1);
+    linear-gradient(112deg, $primary-color, #d0c9c1);
   &__header {
     width: 100%;
     @include flex(row, space-between, flex-start);
@@ -114,6 +116,7 @@ function handleMenuAction(action) {
     gap: 16px;
   }
 }
+
 // Responsive
 @media only screen and (max-width: 1440px) {
   .balance-card {

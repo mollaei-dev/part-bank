@@ -41,6 +41,8 @@ const emptyRow = computed(() => (props.transactions.length < 5 ? 5 - props.trans
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 th,
 td {
   font: inherit;
@@ -52,8 +54,8 @@ td {
   border-spacing: 0 0;
   &__head {
     height: 60px;
-    color: #ffffff;
-    background-color: #4152a0;
+    color: $surface-color;
+    background-color: $primary-color;
     &-title {
       padding: 10px;
       font-weight: 600;
@@ -75,7 +77,7 @@ td {
     border-radius: 8px;
     text-align: center;
     &--hilight {
-      background-color: #f9fafb;
+      background-color: $background-secondary-color;
     }
   }
   &__data {
@@ -83,7 +85,7 @@ td {
     font-size: 16px;
     padding: 10px;
     text-align: center;
-    color: #3c4351;
+    color: $text-color;
     &:first-child {
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;

@@ -1,5 +1,7 @@
+@use './variables' as *;
 @use './mixins' as *;
 @use './helpers' as *;
+
 @font-face {
   font-family: 'peyda';
   src: url('@/assets/fonts/peyda-regular.ttf');
@@ -27,7 +29,7 @@
 }
 body {
   font-family: peyda, sans-serif;
-  background-color: #f7f8fa;
+  background-color: $background-color;
 }
 label,
 input,
@@ -44,13 +46,13 @@ select {
   max-height: 60px;
   border-radius: 16px;
   padding: 16px;
-  background-color: #eb482b;
+  background-color: $error-color;
   @include flex(row,flex-start,center);
   gap: 8px;
   box-sizing: border-box;
 }
 .Vue-Toastification__toast-body.app-toast-body {
-  color: #ffffff;
+  color: $surface-color;
   font-family: Peyda;
   font-weight: 700;
   font-size: 16px;
@@ -59,6 +61,6 @@ select {
 .Vue-Toastification__icon {
   width: 24px;
   height: 24px;
-  fill: white;
-  color: white;
+  fill: $surface-color;
+  color: $surface-color;
 }

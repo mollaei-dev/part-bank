@@ -126,12 +126,13 @@ function loadSampleImage() {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
 
 .upload {
   position: relative;
   width: 320px;
   height: 232px;
-  background-color: #f9fafb;
+  background-color: $background-secondary-color;
   border-radius: 12px;
   &__dropzone {
     position: relative;
@@ -153,7 +154,7 @@ function loadSampleImage() {
         width: 100%;
         height: 100%;
         fill: none;
-        stroke: #e2edff;
+        stroke: $border-color;
         stroke-width: 1px;
         stroke-dasharray: 7 7;
         clip-path: inset(0 round 12px 12px 0 0);
@@ -161,7 +162,7 @@ function loadSampleImage() {
     }
     &--dragging {
       .upload__dropzone-border-rect {
-        stroke: #1976d2;
+        stroke: $info-color;
       }
     }
   }
@@ -181,9 +182,9 @@ function loadSampleImage() {
       font-weight: 600;
       font-size: 14px;
       text-align: center;
-      color: #8999b9;
+      color: $text-secondary-color;
       &--highlight {
-        color: #4152a0;
+        color: $primary-color;
       }
     }
   }
@@ -196,14 +197,14 @@ function loadSampleImage() {
   &__label {
     font-weight: 400;
     font-size: 14px;
-    color: #3c4351;
+    color: $text-color;
   }
   &__icon-more {
     cursor: pointer;
   }
   &__sample-btn {
     background-color: #e3f2fd;
-    color: #1976d2;
+    color: $info-color;
     border: none;
     padding: 4px 8px;
     border-radius: 4px;
@@ -230,7 +231,7 @@ function loadSampleImage() {
     }
   }
   &__error {
-    color: #eb482b;
+    color: $error-color;
     font-weight: 400;
     font-size: 12px;
     padding: 0 8px;

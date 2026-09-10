@@ -21,6 +21,8 @@ const userStore = useUserStore()
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .profile {
   max-height: 116px;
   @include flex(column, center);
@@ -31,7 +33,7 @@ const userStore = useUserStore()
     font-size: 18px;
     line-height: 28px;
     text-align: center;
-    color: #3c4351;
+    color:$text-color;
   }
   &__id {
     @include flex(row, space-between, center);
@@ -40,12 +42,13 @@ const userStore = useUserStore()
     font-weight: 400;
     font-size: 12px;
     text-align: right;
-    color: #8999b9;
+    color: $text-secondary-color;
   }
   &__id-value {
     font-weight: 600;
     font-size: 14px;
-    color: #3c4351;
+    color: $text-color
+;
   }
 }
 </style>

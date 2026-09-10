@@ -30,16 +30,18 @@ watch(searchQuery, (value) => emit('searchInput', value))
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .search {
   width: 257px;
   height: 34px;
   border-radius: 8px;
-  border: 1px solid #e2edff;
+  border: 1px solid $border-color;
   @include flex(row, space-between, center);
   &__input {
     font-weight: 400;
     font-size: 14px;
-    color: #8999b9;
+    color: $text-secondary-color;
     border: none;
     padding: 5px;
     &--isOpen {
@@ -51,7 +53,7 @@ watch(searchQuery, (value) => emit('searchInput', value))
     height: 32px;
     text-align: center;
     padding: 7px;
-    background-color: #eceef6;
+    background-color: $secondary-background-color;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
   }
@@ -72,7 +74,7 @@ watch(searchQuery, (value) => emit('searchInput', value))
     border: none;
     width: auto;
     &--isOpen {
-      border: 1px solid #e2edff;
+      border: 1px solid $border-color;
       min-width: 183px;
     }
     &__input {
@@ -92,9 +94,9 @@ watch(searchQuery, (value) => emit('searchInput', value))
       cursor: pointer;
     }
     &__icon-wrapper {
-      background-color: #ffffff;
+      background-color: $surface-color;
       &--isOpen {
-        background-color: #eceef6;
+        background-color: $secondary-background-color;
       }
     }
   }

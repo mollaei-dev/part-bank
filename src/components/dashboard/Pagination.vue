@@ -57,6 +57,7 @@ function goNext() {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
 
 .pagination {
   width: 100%;
@@ -66,8 +67,8 @@ function goNext() {
   opacity: 1;
   margin-top: 10px;
   &__btn {
-    color: #8999b9;
-    background-color: #f9fafb;
+    color: $text-secondary-color;
+    background-color: $background-secondary-color;
     width: 32px;
     height: 32px;
     border-radius: 4px;
@@ -78,7 +79,7 @@ function goNext() {
     text-align: center;
     cursor: pointer;
     &--active {
-      background-color: #4152a0;
+      background-color: $primary-color;
       color: #ffffff;
     }
   }

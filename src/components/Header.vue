@@ -41,6 +41,8 @@ function closeSidebar() {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .header {
   @include flex(row, space-between, center);
   position: fixed;
@@ -49,7 +51,7 @@ function closeSidebar() {
   z-index: 1000;
   width: 100%;
   height: 68px;
-  background-color: #ffffff;
+  background-color: $surface-color;
   padding: 0 40px;
   box-shadow: 0px 2px 8px 0px #15002b0d;
   &-right {
@@ -62,7 +64,7 @@ function closeSidebar() {
     &-text {
       font-weight: 400;
       font-size: 16px;
-      color: #3c4351;
+      color: $text-color;
     }
   }
   &-left {
@@ -83,7 +85,7 @@ function closeSidebar() {
   &__phone {
     font-weight: 400;
     font-size: 14px;
-    color: #3c4351;
+    color: $text-color;
   }
   &__icon-notification {
     width: 40px;

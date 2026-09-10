@@ -47,6 +47,7 @@ function closeSortMenu() {
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
 
 // Transition classes for Vue dropdown animation
 .dropdown-enter-active,
@@ -80,7 +81,7 @@ function closeSortMenu() {
     &-text {
       font-weight: 400;
       font-size: 14px;
-      color: #8999b9;
+      color: $text-secondary-color;
     }
   }
   &__dropdown {
@@ -91,7 +92,7 @@ function closeSortMenu() {
       @include flex(row, space-between, center);
       border-radius: 8px;
       padding: 7px 8px 7px 4px;
-      border: 1px solid #e2edff;
+      border: 1px solid $border-color;
       cursor: pointer;
       &--isOpen {
         border-bottom-left-radius: 0;
@@ -102,7 +103,7 @@ function closeSortMenu() {
   &__selected {
     font-weight: 400;
     font-size: 14px;
-    color: #3c4351;
+    color: $text-color;
   }
   &__icon-arrow {
     width: 16px;
@@ -115,16 +116,16 @@ function closeSortMenu() {
     width: 100%;
     cursor: pointer;
     list-style-type: none;
-    border: 1px solid #e2edff;
+    border: 1px solid $border-color;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    background-color: #ffffff;
+    background-color: $surface-color;
   }
   &__option {
     padding: 3px 10px;
     font-weight: 400;
     font-size: 14px;
-    color: #3c4351;
+    color: $text-color;
     &:hover {
       background-color: #f0f0f1;
     }

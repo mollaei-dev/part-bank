@@ -25,6 +25,8 @@ const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btn
 </template>
 <style lang="scss">
 @use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
 .card {
   flex: 1;
   width: 338px;
@@ -32,7 +34,7 @@ const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btn
   max-width: 338px;
   height: 260px;
   @include flex(column, space-between);
-  background: #ffffff;
+  background: $surface-color;
   border-radius: 12px;
   padding: 24px;
   &__header {
@@ -41,14 +43,14 @@ const props = defineProps(['cardTitle', 'metaIcon', 'metaLabel', 'btnIcon', 'btn
   &__title {
     font-weight: 700;
     font-size: 20px;
-    color: #3c4351;
+    color: $text-color;
   }
   &__meta {
     @include flex(row, flex-start, center);
     gap: 5px;
   }
   &__meta-label {
-    color: #8999b9;
+    color: $text-secondary-color;
     font-weight: 400;
     font-size: 14px;
   }
