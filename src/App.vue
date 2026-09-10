@@ -2,7 +2,7 @@
 import Header from './components/Header.vue'
 </script>
 <template>
-  <Header v-if="$route.fullPath !== '/'"></Header>
+  <Header v-if="!$route.meta.hideHeader"></Header>
   <router-view v-slot="{ Component }">
     <Transition name="slide-fade" mode="out-in">
       <component :is="Component" :key="$route.fullPath" />

@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     name: 'login',
     component: LoginPage,
-    meta: { guestOnly: true },
+    meta: { guestOnly: true, hideHeader: true },
   },
   {
     path: '/dashboard',
@@ -35,6 +35,12 @@ const routes = [
     name: 'upload-id',
     component: UploadIDPage,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFound.vue'),
+    meta: { hideHeader: true },
   },
 ]
 
