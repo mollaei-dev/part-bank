@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier --write --experimental-cli src/",
-    "mock": "json-server --watch mock/db.json --port 3000"
+    "mock": "json-server --watch public/mock/db.json --port 3000"
   },
   "dependencies": {
     "@vee-validate/rules": "^4.15.1",
