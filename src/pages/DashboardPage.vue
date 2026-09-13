@@ -26,7 +26,7 @@ const cardBalance = computed(() => account.value?.balance ?? 0)
 onMounted(async () => {
   const token = localStorage.getItem('token')
   try {
-    const response = await axios.get('/mock/db.json', {
+    const response = await axios.get(`${import.meta.env.BASE_URL}mock/db.json`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
