@@ -73,6 +73,7 @@ function loadSampleImage() {
   } else {
     userStore.userInfo.backCardImage = `${import.meta.env.BASE_URL}cardIdBack.png`
   }
+  localStorage.setItem('userInfo', JSON.stringify(userStore.userInfo))
 }
 </script>
 <template>
