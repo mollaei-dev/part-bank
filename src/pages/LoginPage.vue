@@ -87,7 +87,7 @@ async function loginHandle(formData) {
         <p class="login__footer">پشتیبانی: ۱۲۳۴۵۶۷۸-۰۲۱</p>
       </div>
       <div class="login__left">
-        <img class="login__image" src="@/assets/images/photo-login.svg" />
+        <img class="login__image" src="@/assets/images/photo-login.jpg" />
       </div>
     </div>
   </div>
