@@ -69,9 +69,9 @@ function handleMenuAction(action) {
 
 function loadSampleImage() {
   if (props.side === 'front') {
-    userStore.userInfo.frontCardImage = '/cardIdFront.png'
+    userStore.userInfo.frontCardImage = `${import.meta.env.BASE_URL}cardIdFront.png`
   } else {
-    userStore.userInfo.backCardImage = '/cardIdBack.png'
+    userStore.userInfo.backCardImage = `${import.meta.env.BASE_URL}cardIdBack.png`
   }
 }
 </script>
