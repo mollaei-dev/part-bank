@@ -108,9 +108,9 @@ async function loginHandle(formData) {
     box-shadow: 0px 0px 4px 0px #0043650d;
     border-radius: 20px;
     max-width: 1200px;
-    width: 65%;
-    max-height: 840px;
-    height: auto;
+    width: 80%;
+    height: 840px;
+    max-height: calc(100vh - 100px);
   }
   &__right {
     flex: 1 1 50%;
@@ -118,6 +118,7 @@ async function loginHandle(formData) {
     height: 100%;
     gap: 40px;
     padding: 32px 0;
+    box-sizing: border-box;
   }
   &__logo {
     width: 46%;
@@ -168,50 +169,48 @@ async function loginHandle(formData) {
 
 //Responsive
 @media only screen and (max-width: 1200px) {
-  .login__container {
-    width: 85%;
+  .login {
+    &__container {
+      width: 90%;
+      height: 650px;
+    }
+    &__right {
+      gap: 20px;
+    }
+    &__logo {
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+    &__form {
+      margin-bottom: 70px;
+      gap: 24px;
+    }
   }
 }
 @media only screen and (max-width: 992px) {
   .login {
     &__container {
-      width: 90%;
-      height: 550px;
+      height: 620px;
+    }
+    &__form {
+      min-width: 250px;
     }
   }
 }
 @media only screen and (max-width: 768px) {
   .login {
-    display: block;
     &__container {
       flex-direction: column;
+      width: 500px;
+      height: auto;
+      max-height: none;
+      margin: 30px;
+    }
+    &__left {
+      padding: 30px;
     }
     &__form {
-      height: auto;
-      width: 100%;
-    }
-    &__logo {
-      width: 35%;
-      height: auto;
-      max-height: 240px;
-      object-fit: contain;
-      margin-bottom: 30px;
-    }
-    &__image {
-      height: auto;
-      width: 100%;
-      max-height: 400px;
-      object-fit: contain;
-    }
-  }
-}
-@media only screen and (max-width: 576px) {
-  .login {
-    &__container {
-      width: 100%;
-    }
-    &__form {
-      width: 80%;
+      margin-bottom: 40px;
     }
   }
 }
