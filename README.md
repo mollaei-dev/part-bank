@@ -11,6 +11,10 @@ The project is responsive and works on different screen sizes.
 
 The original backend is not available now, so the project uses demo mode and mock data for some server responses.
 
+## Live Demo
+
+[View Live Demo](https://mollaei-dev.github.io/part-bank/)
+
 ## Features
 
 - Login page
